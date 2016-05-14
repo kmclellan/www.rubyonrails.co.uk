@@ -5,6 +5,11 @@ config[:url]                     = "https://#{config[:hostname]}"
 config[:email_address]           = "hello@#{config[:domain]}"
 config[:cloudfront_distribution] = 'ECH0LZH3EE850'
 
+# UTM-related bits
+config[:default_utm_source] = config[:hostname]
+config[:default_utm_medium] = 'website'
+config[:default_utm_campaign] = 'Other Projects'
+
 set :markdown_engine, :redcarpet
 
 # Pages with no layout
@@ -53,6 +58,37 @@ helpers do
     mail_to config[:email_address], config[:email_address], options
   end
 
+  def utm_link_to(title_or_url, url_or_options = nil, options = {}, &block)
+    if block_given?
+      title   = nil
+      url     = title_or_url
+      options = url_or_options || {}
+    else
+      title   = title_or_url
+      url     = url_or_options
+      options = options
+    end
+
+    utm_source   = options.delete(:source) || config[:default_utm_source]
+    utm_medium   = options.delete(:medium) || config[:default_utm_medium]
+    utm_campaign = options.delete(:campaign) || config[:default_utm_campaign]
+    utm_content  = options.delete(:content) || title
+
+    query = {
+      utm_source: utm_source,
+      utm_medium: utm_medium,
+      utm_campaign: utm_campaign,
+      utm_content: utm_content
+    }.merge(options.delete(:query) || {}).reject { |k, v| v.nil? }
+
+    options = { query: query }.merge(options)
+
+    if block_given?
+      link_to url, options, &block
+    else
+      link_to title, url, options
+    end
+  end
   def markdown(text)
     Tilt['markdown'].new { text }.render
   end

@@ -48,8 +48,8 @@
           Teignmouth<br/>
           Devon TQ14 8HA<br/>
           United Kingdom<br />
-          <abbr title="Telephone">Tel:</abbr> <a href="tel:+44-7949-077744">+44 (0)7949 077744</a><br/>
-          <abbr title="Email address">E:</abbr> <%= mail_to_link %>
+          Telephone: <a href="tel:+44-7949-077744">+44 (0)7949 077744</a><br/>
+          Email: <%= mail_to_link %>
         </address>
       </div>
       <div class="col-lg-4">
@@ -64,7 +64,10 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
         <p>
-          <strong>Copyright &copy; 2016 Wossname Industries.</strong> All rights reserved.<br/>
+          <strong>
+            Copyright &copy; 2016
+            <%= utm_link_to 'Wossname Industries', 'https://woss.name/' %>.
+          </strong> All rights reserved.<br/>
           "Ruby on Rails" is registered trademark of David Heinemeier Hansson. Technically, I haven't actually asked permission to use this domain name, but I've owned it since 2009 and thought I might as well put it to some use! It's better to ask forgiveness than permission, right? <tt>;-)</tt>
         </p>
       </div>
