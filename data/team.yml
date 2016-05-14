@@ -1,0 +1,25 @@
+mathie:
+  first_name: Graeme
+  last_name: Mathieson
+  image_url: /images/mathie.jpg
+  bio: |
+    I've been developing web applications with the Ruby on Rails
+    framework for over a decade now (something that not many people can
+    claim!). Prior to that, I was building web apps in Python, and
+    before that I was building embedded C++ code for Voice over IP
+    gateways.
+
+    In addition to Ruby, I've got a fair chunk of experience with
+    JavaScript, and with managing the platforms we deploy apps onto
+    (the cool kids call this bit DevOps). I've got a BEng (Hons) in
+    Software Engineering from the University of Edinburgh and an AAT
+    Diploma in Accounting (don't ask).
+
+    When I'm not in the office, staring at a sea of code, I really
+    enjoy a spot of indoor rock climbing. You can often find me hanging
+    around the local climbing wall, trying to conquer my latest
+    project!
+  social:
+    twitter: https://twitter.com/mathie
+    facebook: https://www.facebook.com/mathie
+    linkedin: https://www.linkedin.com/in/mathie

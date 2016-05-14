@@ -15,46 +15,29 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-        <div class="team-member wow zoomIn">
-          <img src="/images/mathie.jpg" class="img-responsive img-circle" alt="">
-          <h4><span class="navy">Graeme</span> Mathieson</h4>
-          <p>
-            I've been developing web applications with the Ruby on Rails
-            framework for over a decade now (something that not many people can
-            claim!). Prior to that, I was building web apps in Python, and
-            before that I was building embedded C++ code for Voice over IP
-            gateways.
-          </p>
+      <% data.team.each do |id, member|%>
+        <div class="col-md-4 col-md-offset-4">
+          <div class="team-member wow zoomIn">
+            <%= image_tag member.image_url, alt: [member.first_name, member.last_name].compact.join(' '), class: 'img-responsive img-circle' %>
+            <h4>
+              <span class="navy"><%= member.first_name %></span>
+              <%= member.last_name %>
+            </h4>
 
-          <p>
-            In addition to Ruby, I've got a fair chunk of experience with
-            JavaScript, and with managing the platforms we deploy apps onto
-            (the cool kids call this bit DevOps). I've got a BEng (Hons) in
-            Software Engineering from the University of Edinburgh and an AAT
-            Diploma in Accounting (don't ask).
-          </p>
+            <%= markdown member.bio %>
 
-          <p>
-            When I'm not in the office, staring at a sea of code, I really
-            enjoy a spot of indoor rock climbing. You can often find me hanging
-            around the local climbing wall, trying to conquer my latest
-            project!
-          </p>
-
-          <ul class="list-inline social-icon">
-            <li>
-              <a href="https://twitter.com/mathie" title="@mathie on Twitter"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="https://www.facebook.com/mathie"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li
-              ><a href="https://www.linkedin.com/in/mathie"><i class="fa fa-linkedin"></i></a>
-            </li>
-          </ul>
+            <ul class="list-inline social-icon">
+              <% member.social.each do |icon, url| %>
+                <li>
+                  <% link_to url do %>
+                    <i class="fa fa-<%= icon %>"></i>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center m-t-lg m-b-lg">
