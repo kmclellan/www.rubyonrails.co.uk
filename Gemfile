@@ -12,6 +12,9 @@ gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 gem 'middleman', '>= 4.0.0'
 gem 'middleman-minify-html'
 
+# Markdown support
+gem 'redcarpet'
+
 # Rake for automating the build and deploy
 gem 'rake'
 

@@ -5,6 +5,8 @@ config[:url]                     = "https://#{config[:hostname]}"
 config[:email_address]           = "hello@#{config[:domain]}"
 config[:cloudfront_distribution] = 'ECH0LZH3EE850'
 
+set :markdown_engine, :redcarpet
+
 # Pages with no layout
 page '/*.xml', layout: false
 page '/*.json', layout: false
@@ -49,5 +51,9 @@ end
 helpers do
   def mail_to_link(options = {})
     mail_to config[:email_address], config[:email_address], options
+  end
+
+  def markdown(text)
+    Tilt['markdown'].new { text }.render
   end
 end
