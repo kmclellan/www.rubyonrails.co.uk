@@ -26,6 +26,51 @@ mr_urf:
     but, more importantly, he also knows how best to use it to deliver great
     results for his clients. I learned a great deal from him during the
     project.
+kelly:
+  name: Kelly McLellan
+  job_title: Owner
+  company: A+ Tutors
+  company_url: http://aplustutors.co.uk/
+  image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
+  linked_in_url: https://www.linkedin.com/in/kellymclellan
+  text: |
+    Highly recommended. I really enjoy working with Graeme. He is extremely
+    good at what he does. He is very trustworthy, his code is of impeccable
+    quality, and, for most programming tasks, he is fast - very fast. He
+    probably thinks and types twice as fast as me! If these are qualities that
+    you are looking for, especially trust and quality, then he is very good
+    value for money.
+tj:
+  name: T.J. Sheehy
+  job_title: Director
+  company: Klir Limited
+  image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
+  linked_in_url: https://www.linkedin.com/in/tjsheehy
+  text: |
+    It was great working with Graeme. If you go to him with anything, he'll
+    always have some valuable insight. He is extremely helpful and does
+    everything to a high standard. I can't recommend him highly enough.
+ryan:
+  name: Ryan Stenhouse
+  job_title: Ruby developer, speaker, and coach
+  image_url: https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAICAAAAJGM2YWE3MDVkLWE0OTEtNGNkYi05YWIwLTdlNzMyNGJhNzQ0MQ.jpg
+  linked_in_url: https://www.linkedin.com/in/ryanstenhouse
+  text: |
+    Graeme is one of the most patient, meticulous, laid back and approachable
+    people I've ever had the pleasure to work with. His Engineering skills are
+    at a level I aspire to, and he's been a constant source of inspiration for
+    the time we were working together. Any team is strengthened by having
+    Graeme on it.
+bben:
+  name: Benjamin Brinckerhoff
+  job_title: Lead Software Engineer
+  company: Figly
+  image_url: https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/003/009/08c07d4.jpg
+  linked_in_url: https://www.linkedin.com/in/benjaminbrinckerhoff
+  text: |
+    Graeme is a top-notch engineer who possesses vast and detailed knowledge
+    about the technical inner workings of FreeAgent. He also takes on big
+    technical challenges and sees them through. I have learned a lot from him!
 craig_webster:
   name: Craig Webster
   job_title: Ruby &amp; DevOps Consultant
@@ -45,20 +90,34 @@ craig_webster:
     delivery team relaxed and productive. This enabled us to successfully
     deliver a large system from a hugely complex set of constantly evolving
     requirements.
-kelly:
-  name: Kelly McLellan
-  job_title: Owner
-  company: A+ Tutors
-  company_url: http://aplustutors.co.uk/
+btmh:
+  name: Graeme McAlister
+  job_title: Head of Fellowship &amp; Membership Services
+  company: Royal College of Physicians of Edinburgh
+  company_url: http://www.rcpe.ac.uk/
   image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
-  linked_in_url: https://www.linkedin.com/in/kellymclellan
+  linked_in_url: https://www.linkedin.com/in/graememcalister
   text: |
-    Highly recommended. I really enjoy working with Graeme. He is extremely
-    good at what he does. He is very trustworthy, his code is of impeccable
-    quality, and, for most programming tasks, he is fast - very fast. He
-    probably thinks and types twice as fast as me! If these are qualities that
-    you are looking for, especially trust and quality, then he is very good
-    value for money.
+    The Behind the Medical Headlines site was a fairly successful pilot which
+    we were very keen to develop further, but the site design was becoming
+    dated, was not very user-friendly and was manually intensive in terms of
+    staff support. As such, its ongoing development was not sustainable in its
+    previous form.
+
+    As a result of engaging Rubaidh, we now have a considerably more attractive
+    site which is not only more user-friendly and includes a range of new
+    features which could not have been supported under the former design, but
+    is also considerably easier to update.
+
+    The work undertaken by Rubaidh has enabled us to reduce staff time required
+    to support the site by approximately 300% and has increased options for
+    staff support and cover through its easy-to-use interface. This has,
+    importantly, provided a considerably more sustainable platform from which
+    we can develop and support the site further.
+
+    In closing, I would add that once briefed, Rubaidh provided an excellent
+    tailor-made service and I would strongly recommend Rubaidh to others
+    similarly wishing to redevelop and redefine their online presence.
 graham_savage:
   name: Graham Savage
   job_title: Chief Technical Officer

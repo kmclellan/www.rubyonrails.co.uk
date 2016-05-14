@@ -13,8 +13,8 @@
       </div>
     </div>
     <div class="row features-block">
-      <% data.testimonials.each do |id, testimonial| %>
-        <div class="col-lg-4" id="testimonial-<%= id %>">
+      <% data.testimonials.each_with_index do |(id, testimonial), i| %>
+        <div class="col-md-4 m-b-lg" id="testimonial-<%= id %>">
           <div class="bubble">
             <%= markdown testimonial.text %>
           </div>
@@ -37,6 +37,10 @@
             </div>
           </div>
         </div>
+
+        <% if i % 3 == 2 %>
+          <div class="clearfix visible-md-block visible-lg-block"></div>
+        <% end %>
       <% end %>
     </div>
   </div>
