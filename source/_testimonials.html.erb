@@ -1,85 +1,42 @@
-<section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center wow zoomIn">
-        <i class="fa fa-comment big-icon"></i>
-        <h1>
-          What our users say
-        </h1>
-        <div class="testimonials-text">
-          <i>"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."</i>
-        </div>
-        <small>
-          <strong>12.02.2014 - Andy Smith</strong>
-        </small>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="comments gray-section" style="margin-top: 0">
+<section class="comments gray-section" style="margin-top: 0" id="testimonials">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        <h1>What our partners say</h1>
-        <p>Donec sed odio dui. Etiam porta sem malesuada. </p>
+        <h1>Testimonials</h1>
+
+        <p>
+          Here are some of the lovely things that previous clients and
+          colleagues have said about me:
+        </p>
       </div>
     </div>
     <div class="row features-block">
-      <div class="col-lg-4">
-        <div class="bubble">
-          "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-        </div>
-        <div class="comments-avatar">
-          <a href="" class="pull-left">
-            <img alt="image" src="/images/avatar3.jpg">
-          </a>
-          <div class="media-body">
-            <div class="commens-name">
-              Andrew Williams
+      <% data.testimonials.each do |id, testimonial| %>
+        <div class="col-lg-4" id="testimonial-<%= id %>">
+          <div class="bubble">
+            <%= markdown testimonial.text %>
+          </div>
+          <div class="comments-avatar">
+            <a href="<%= testimonial.linked_in_url %>" title="<%= [ testimonial.name, testimonial.job_title ].compact.join(', ') %>" class="pull-left">
+              <img alt="<%= [ testimonial.name, testimonial.job_title ].compact.join(', ') %>" src="<%= testimonial.image_url %>">
+            </a>
+            <div class="media-body">
+              <div class="commens-name">
+                <%= link_to testimonial.name, testimonial.linked_in_url %>
+              </div>
+              <small class="text-muted">
+                <% if testimonial.company.present? %>
+                  <%= testimonial.job_title %>,
+                  <%= testimonial.company_url.present? ? link_to(testimonial.company, testimonial.company_url) : testimonial.company %>
+                <% else %>
+                  <%= testimonial.job_title %>
+                <% end %>
+            </small>
             </div>
-            <small class="text-muted">Company X from California</small>
           </div>
         </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="bubble">
-          "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-        </div>
-        <div class="comments-avatar">
-          <a href="" class="pull-left">
-            <img alt="image" src="/images/avatar1.jpg">
-          </a>
-          <div class="media-body">
-            <div class="commens-name">
-              Andrew Williams
-            </div>
-            <small class="text-muted">Company X from California</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="bubble">
-          "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-        </div>
-        <div class="comments-avatar">
-          <a href="" class="pull-left">
-            <img alt="image" src="/images/avatar2.jpg">
-          </a>
-          <div class="media-body">
-            <div class="commens-name">
-              Andrew Williams
-            </div>
-            <small class="text-muted">Company X from California</small>
-          </div>
-        </div>
-      </div>
-
-
-
+      <% end %>
     </div>
   </div>
 

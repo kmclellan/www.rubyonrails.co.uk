@@ -796,7 +796,6 @@ section.comments {
 }
 .bubble {
   position: relative;
-  height: 120px;
   padding: 20px;
   background: #FFFFFF;
   -webkit-border-radius: 10px;
