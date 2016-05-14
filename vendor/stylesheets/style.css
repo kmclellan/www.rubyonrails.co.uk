@@ -155,6 +155,9 @@ h1 {
 .header-back.two {
   background: url('/images/header_two.jpg') 50% 0 no-repeat;
 }
+.header-back.three {
+  background: url('/images/header_three.jpg') 50% 0 no-repeat;
+}
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 /* Carousel base class */
