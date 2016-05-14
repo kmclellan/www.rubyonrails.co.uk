@@ -22,6 +22,9 @@ var javascripts = {
     'assets/javascripts/all.js'
   ],
   "ie.js": [
+    'vendor/javascripts/respond.js',
+    'vendor/javascripts/html5shiv.js',
+    'vendor/javascripts/placeholder-IE-fixes.js'
   ]
 };
 
