@@ -45,3 +45,9 @@ activate :external_pipeline,
 configure :build do
   activate :minify_html
 end
+
+helpers do
+  def mail_to_link(options = {})
+    mail_to config[:email_address], config[:email_address], options
+  end
+end
