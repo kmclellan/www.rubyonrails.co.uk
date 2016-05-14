@@ -12,6 +12,13 @@ var output_dir   = 'intermediate',
 
 var javascripts = {
   "all.js": [
+    'vendor/javascripts/jquery-2.1.1.js',
+    'vendor/javascripts/pace.min.js',
+    'vendor/javascripts/bootstrap.js',
+    'vendor/javascripts/classie.min.js',
+    'vendor/javascripts/cbpAnimatedHeader.js',
+    'vendor/javascripts/wow.min.js',
+    'vendor/javascripts/inspinia.js',
     'assets/javascripts/all.js'
   ],
   "ie.js": [
