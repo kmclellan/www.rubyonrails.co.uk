@@ -30,6 +30,10 @@ var javascripts = {
 
 var stylesheets = {
   'all.css': [
+    'vendor/stylesheets/bootstrap.css',
+    'vendor/stylesheets/animate.min.css',
+    'vendor/stylesheets/font-awesome.css',
+    'vendor/stylesheets/style.css',
   ]
 };
 
