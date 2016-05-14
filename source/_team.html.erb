@@ -1,4 +1,4 @@
-<section id="team" class="gray-section team">
+<section id="team" class="white-section team">
   <div class="container">
     <div class="m-b-lg">
       <div class="text-center">
@@ -14,11 +14,16 @@
       </div>
     </div>
 
-    <div class="row">
-      <% data.team.each do |id, member|%>
-        <div class="col-md-4 col-md-offset-4">
-          <div class="team-member wow zoomIn">
+    <% data.team.each do |id, member|%>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+          <div class="team-member wow fadeInLeft">
             <%= image_tag member.image_url, alt: [member.first_name, member.last_name].compact.join(' '), class: 'img-responsive img-circle' %>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="wow fadeInRight">
             <h4>
               <span class="navy"><%= member.first_name %></span>
               <%= member.last_name %>
@@ -37,8 +42,9 @@
             </ul>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center m-t-lg m-b-lg">
         <h2>Join us?</h2>
