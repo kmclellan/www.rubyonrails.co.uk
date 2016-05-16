@@ -1,7 +1,108 @@
+$navy: #eb7066;
+
 @import "bootstrap";
 @import "font-awesome";
 @import "style";
 
-.contact {
-  background-image: url('/images/world_map.png');
+$white: #fff;
+$dark-navy: darken($navy, 10%);
+
+.landing-page {
+  a {
+    &.navy-link {
+      &:hover {
+        color: $dark-navy;
+      }
+    }
+  }
+
+  .btn-primary {
+    &:hover, &:focus, &:active, &.active, .open .dropdown-toggle.btn-primary {
+      background: {
+        color: $dark-navy;
+      }
+
+      border: {
+        color: $dark-navy;
+      }
+    }
+  }
+
+  .navbar-default {
+    .navbar-brand {
+      &:hover, &:focus {
+        background: $dark-navy;
+      }
+    }
+  }
+
+  .social-icon {
+    a {
+      &:hover {
+        background: $dark-navy;
+      }
+    }
+  }
+
+  .header-back.one {
+    background: url('/images/header_one.jpg') 50% 0 no-repeat;
+  }
+
+  .header-back.two {
+    background: url('/images/header_two.jpg') 50% 0 no-repeat;
+  }
+
+  .header-back.three {
+    background: url('/images/header_three.jpg') 50% 0 no-repeat;
+  }
+
+  section {
+    p.lead {
+      font-size: 16px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      p.lead {
+        font-size: 21px;
+      }
+    }
+
+    &.navy-section, &.gray-section, &.white-section {
+      margin: {
+        top: 0px;
+      }
+    }
+
+    &.navy-section {
+      color: #fff;
+
+      p, p a, p a:hover, .big-icon, h2 a, h2 a:hover {
+        color: #fff !important;
+      }
+
+      p {
+        a, a:hover {
+          text: {
+            decoration: underline;
+          }
+        }
+      }
+    }
+
+    &.white-section {
+      background: $white;
+    }
+
+    &.comments {
+      padding-bottom: 40px;
+    }
+  }
+
+  .contact {
+    background-image: url('/images/world_map.png');
+  }
+
+  .bubble {
+    height: auto;
+  }
 }
