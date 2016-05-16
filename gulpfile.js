@@ -8,7 +8,8 @@ var gulp       = require('gulp'),
 
 var output_dir   = 'intermediate',
   js_output_dir  = output_dir + '/javascripts/',
-  css_output_dir = output_dir + '/stylesheets/';
+  css_output_dir = output_dir + '/stylesheets/',
+  font_output_dir = output_dir + '/fonts/';
 
 var javascripts = {
   "all.js": [
@@ -67,6 +68,13 @@ gulp.task('all.css', function() {
     ]))
     .pipe(concat('all.css'))
     .pipe(gulp.dest(css_output_dir));
+});
+
+gulp.task('fonts', ['fonts:fontawesome']);
+
+gulp.task('fonts:fontawesome', function() {
+  return gulp.src('bower_components/font-awesome/fonts/fontawesome-webfont.*')
+  .pipe(gulp.dest(font_output_dir));
 });
 
 gulp.task('watch', function() {

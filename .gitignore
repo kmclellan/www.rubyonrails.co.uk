@@ -15,8 +15,9 @@
 /.sass-cache
 /.cache
 
-# Ignore node modules
+# Ignore node modules & bower components
 /node_modules
+/bower_components
 
 # Ignore .DS_store file
 .DS_Store
