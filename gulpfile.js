@@ -36,9 +36,8 @@ var stylesheets = {
   'all.css': [
     'vendor/stylesheets/bootstrap.css',
     'vendor/stylesheets/animate.min.css',
-    'vendor/stylesheets/font-awesome.css',
-    'vendor/stylesheets/style.css',
-    'intermediate/stylesheets/demo.css'
+    'intermediate/stylesheets/demo.css',
+    'vendor/stylesheets/style.css'
   ]
 };
 
@@ -68,7 +67,12 @@ gulp.task('ie.js', function() {
 gulp.task('sass', function() {
   return gulp
     .src('assets/stylesheets/*.scss')
-    .pipe(sass())
+    .pipe(sass({
+      includePaths: [
+        'assets/stylesheets',
+        'bower_components/font-awesome/scss'
+      ]
+    }))
     .pipe(gulp.dest('intermediate/stylesheets'));
 });
 
@@ -93,7 +97,7 @@ gulp.task('watch', function() {
   gulp.watch(javascripts['ie.js'],  ['ie.js']);
   gulp.watch(stylesheets['all.css'], ['all.css']);
 
-  glup.watch('assets/stylesheets/*.scss', ['sass']);
+  gulp.watch('assets/stylesheets/*.scss', ['sass']);
 
   // Watch bower components for changes.
   gulp.watch(['bower_components/font-awesome'], ['fonts:fontawesome']);
