@@ -35,7 +35,7 @@ var javascripts = {
 
 var stylesheets = {
   'all.css': [
-    'vendor/stylesheets/animate.min.css',
+    'bower_components/animate.css/animate.css',
     'intermediate/stylesheets/demo.css',
     'vendor/stylesheets/style.css'
   ]
