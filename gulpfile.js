@@ -21,7 +21,7 @@ var javascripts = {
     'bower_components/PACE/pace.js',
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'bower_components/classie/classie.js',
-    'vendor/javascripts/cbpAnimatedHeader.js',
+    'bower_components/AnimatedHeader/js/cbpAnimatedHeader.js',
     'bower_components/wow/dist/wow.js',
     'vendor/javascripts/inspinia.js',
     'source/javascripts/all.js'
