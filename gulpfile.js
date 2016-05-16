@@ -22,7 +22,7 @@ var javascripts = {
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'bower_components/classie/classie.js',
     'vendor/javascripts/cbpAnimatedHeader.js',
-    'vendor/javascripts/wow.min.js',
+    'bower_components/wow/dist/wow.js',
     'vendor/javascripts/inspinia.js',
     'source/javascripts/all.js'
   ],
