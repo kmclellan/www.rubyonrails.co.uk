@@ -26,7 +26,8 @@ function bowerComponent(pkg) {
     'animatedheader': 'AnimatedHeader/js/cbpAnimatedHeader.js',
     'wow':            'wow/dist/wow.js',
     'respond':        'respond/dest/respond.src.js',
-    'html5shiv':      'html5shiv/dist/html5shiv.js'
+    'html5shiv':      'html5shiv/dist/html5shiv.js',
+    'animate':        'animate.css/animate.css'
   };
 
   if(!pkgs[pkg]) {
@@ -85,14 +86,14 @@ gulp.task('all.css', function() {
   return gulp
     .src([
       'source/stylesheets/*.scss',
-      'bower_components/animate.css/animate.css'
+      bowerComponent('animate')
     ])
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
         'source/stylesheets',
-        'bower_components/bootstrap-sass/assets/stylesheets',
-        'bower_components/font-awesome/scss',
+        bowerRoot + '/bootstrap-sass/assets/stylesheets',
+        bowerRoot + '/font-awesome/scss',
         'vendor/inspinia/scss'
       ]
     }))
@@ -116,9 +117,9 @@ gulp.task('watch', function() {
 
   gulp.watch([
     'source/stylesheets/**/*.scss',
-    'bower_components/animate.css/animate.css',
-    'bower_components/bootstrap-sass/assets/stylesheets/**/*.scss',
-    'bower_components/font-awesome/scss/**/*.scss'
+    bowerRoot + '/animate.css/animate.css',
+    bowerRoot + '/bootstrap-sass/assets/stylesheets/**/*.scss',
+    bowerRoot + '/font-awesome/scss/**/*.scss'
   ], ['stylesheets']);
 
   // Watch bower components for changes.
