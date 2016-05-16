@@ -33,14 +33,6 @@ var javascripts = {
   ]
 };
 
-var stylesheets = {
-  'all.css': [
-    'bower_components/animate.css/animate.css',
-    'intermediate/stylesheets/demo.css',
-    'vendor/stylesheets/style.css'
-  ]
-};
-
 var fonts = [
   'bower_components/font-awesome/fonts/*',
   'bower_components/bootstrap-sass/assets/fonts/**/*'
@@ -50,7 +42,7 @@ gulp.task('default', ['build', 'watch']);
 gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
 
 gulp.task('javascripts', ['all.js', 'ie.js']);
-gulp.task('stylesheets', ['sass', 'all.css']);
+gulp.task('stylesheets', ['all.css']);
 
 gulp.task('all.js', function() {
   return gulp
@@ -72,30 +64,26 @@ gulp.task('ie.js', function() {
     .pipe(gulp.dest(js_output_dir));
 });
 
-gulp.task('sass', function() {
+gulp.task('all.css', function() {
   return gulp
-    .src('assets/stylesheets/*.scss')
+    .src([
+      'assets/stylesheets/*.scss',
+      'bower_components/animate.css/animate.css'
+    ])
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
         'assets/stylesheets',
         'bower_components/bootstrap-sass/assets/stylesheets',
-        'bower_components/font-awesome/scss'
+        'bower_components/font-awesome/scss',
+        'vendor/inspinia/scss'
       ]
     }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('intermediate/stylesheets'));
-});
-
-gulp.task('all.css', function() {
-  return gulp
-    .src(stylesheets['all.css'])
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(concat('all.css'))
     .pipe(postcss([
       autoprefixer(),
       cssnano()
     ]))
-    .pipe(concat('all.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(css_output_dir));
 });
@@ -108,13 +96,13 @@ gulp.task('fonts', function() {
 gulp.task('watch', function() {
   gulp.watch(javascripts['all.js'], ['all.js']);
   gulp.watch(javascripts['ie.js'],  ['ie.js']);
-  gulp.watch(stylesheets['all.css'], ['all.css']);
 
   gulp.watch([
     'assets/stylesheets/**/*.scss',
+    'bower_components/animate.css/animate.css',
     'bower_components/bootstrap-sass/assets/stylesheets/**/*.scss',
     'bower_components/font-awesome/scss/**/*.scss'
-  ], ['sass']);
+  ], ['stylesheets']);
 
   // Watch bower components for changes.
   gulp.watch([fonts], ['fonts']);
