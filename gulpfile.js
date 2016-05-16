@@ -27,7 +27,7 @@ var javascripts = {
   ],
   "ie.js": [
     'vendor/javascripts/respond.js',
-    'vendor/javascripts/html5shiv.js',
+    'bower_components/html5shiv/dist/html5shiv.js',
     'vendor/javascripts/placeholder-IE-fixes.js'
   ]
 };
