@@ -20,7 +20,7 @@ var javascripts = {
     'bower_components/jquery/dist/jquery.js',
     'bower_components/PACE/pace.js',
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-    'vendor/javascripts/classie.js',
+    'bower_components/classie/classie.js',
     'vendor/javascripts/cbpAnimatedHeader.js',
     'vendor/javascripts/wow.min.js',
     'vendor/javascripts/inspinia.js',
