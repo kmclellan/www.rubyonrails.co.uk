@@ -110,10 +110,14 @@ gulp.task('watch', function() {
   gulp.watch(javascripts['ie.js'],  ['ie.js']);
   gulp.watch(stylesheets['all.css'], ['all.css']);
 
-  gulp.watch('assets/stylesheets/*.scss', ['sass']);
+  gulp.watch([
+    'assets/stylesheets/**/*.scss',
+    'bower_components/bootstrap-sass/assets/stylesheets/**/*.scss',
+    'bower_components/font-awesome/scss/**/*.scss'
+  ], ['sass']);
 
   // Watch bower components for changes.
-  gulp.watch(['bower_components/font-awesome/fonts/*', 'bower_components/bootstrap/assets/fonts/**/*'], ['fonts']);
+  gulp.watch([fonts], ['fonts']);
 });
 
 gulp.task('clean', function() {
