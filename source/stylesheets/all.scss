@@ -74,6 +74,14 @@ $dark-navy: darken($navy, 10%);
     }
 
     &.navy-section {
+      .navy-line {
+        border: {
+          bottom: {
+            color: $white;
+          }
+        }
+      }
+
       color: #fff;
 
       p, p a, p a:hover, .big-icon, h2 a, h2 a:hover {
