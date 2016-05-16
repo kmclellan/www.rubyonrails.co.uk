@@ -16,9 +16,9 @@ var output_dir   = 'intermediate',
 
 var javascripts = {
   "all.js": [
-    'vendor/javascripts/jquery-2.1.1.js',
+    'bower_components/jquery/dist/jquery.js',
     'vendor/javascripts/pace.min.js',
-    'vendor/javascripts/bootstrap.js',
+    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'vendor/javascripts/classie.js',
     'vendor/javascripts/cbpAnimatedHeader.js',
     'vendor/javascripts/wow.min.js',
@@ -34,19 +34,22 @@ var javascripts = {
 
 var stylesheets = {
   'all.css': [
-    'vendor/stylesheets/bootstrap.css',
     'vendor/stylesheets/animate.min.css',
     'intermediate/stylesheets/demo.css',
     'vendor/stylesheets/style.css'
   ]
 };
 
+var fonts = [
+  'bower_components/font-awesome/fonts/*',
+  'bower_components/bootstrap-sass/assets/fonts/**/*'
+];
+
 gulp.task('default', ['build', 'watch']);
 gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
 
 gulp.task('javascripts', ['all.js', 'ie.js']);
 gulp.task('stylesheets', ['sass', 'all.css']);
-gulp.task('fonts', ['fonts:fontawesome']);
 
 gulp.task('all.js', function() {
   return gulp
@@ -70,6 +73,7 @@ gulp.task('sass', function() {
     .pipe(sass({
       includePaths: [
         'assets/stylesheets',
+        'bower_components/bootstrap-sass/assets/stylesheets',
         'bower_components/font-awesome/scss'
       ]
     }))
@@ -87,8 +91,8 @@ gulp.task('all.css', function() {
     .pipe(gulp.dest(css_output_dir));
 });
 
-gulp.task('fonts:fontawesome', function() {
-  return gulp.src('bower_components/font-awesome/fonts/*')
+gulp.task('fonts', function() {
+  return gulp.src(fonts)
   .pipe(gulp.dest(font_output_dir));
 });
 
