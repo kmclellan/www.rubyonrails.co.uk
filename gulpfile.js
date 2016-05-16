@@ -27,7 +27,7 @@ var javascripts = {
     'source/javascripts/all.js'
   ],
   "ie.js": [
-    'vendor/javascripts/respond.js',
+    'bower_components/respond/dest/respond.src.js',
     'bower_components/html5shiv/dist/html5shiv.js',
     'vendor/javascripts/placeholder-IE-fixes.js'
   ]
