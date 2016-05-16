@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp       = require('gulp'),
+  sourcemaps   = require('gulp-sourcemaps'),
   concat       = require('gulp-concat'),
   uglify       = require('gulp-uglify'),
   postcss      = require('gulp-postcss'),
@@ -54,22 +55,27 @@ gulp.task('stylesheets', ['sass', 'all.css']);
 gulp.task('all.js', function() {
   return gulp
     .src(javascripts['all.js'])
+    .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(js_output_dir));
 });
 
 gulp.task('ie.js', function() {
   return gulp
     .src(javascripts['ie.js'])
+    .pipe(sourcemaps.init())
     .pipe(concat('ie.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(js_output_dir));
 });
 
 gulp.task('sass', function() {
   return gulp
     .src('assets/stylesheets/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
         'assets/stylesheets',
@@ -77,17 +83,20 @@ gulp.task('sass', function() {
         'bower_components/font-awesome/scss'
       ]
     }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('intermediate/stylesheets'));
 });
 
 gulp.task('all.css', function() {
   return gulp
     .src(stylesheets['all.css'])
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(postcss([
       autoprefixer(),
       cssnano()
     ]))
     .pipe(concat('all.css'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(css_output_dir));
 });
 
