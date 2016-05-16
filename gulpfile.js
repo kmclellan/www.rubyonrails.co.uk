@@ -113,7 +113,7 @@ gulp.task('watch', function() {
   gulp.watch('assets/stylesheets/*.scss', ['sass']);
 
   // Watch bower components for changes.
-  gulp.watch(['bower_components/font-awesome'], ['fonts:fontawesome']);
+  gulp.watch(['bower_components/font-awesome/fonts/*', 'bower_components/bootstrap/assets/fonts/**/*'], ['fonts']);
 });
 
 gulp.task('clean', function() {
