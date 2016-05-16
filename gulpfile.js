@@ -15,27 +15,47 @@ var output_dir   = 'intermediate',
   css_output_dir = output_dir + '/stylesheets/',
   font_output_dir = output_dir + '/fonts/';
 
+var bowerRoot = 'bower_components';
+
+function bowerComponent(pkg) {
+  var pkgs = {
+    'jquery':         'jquery/dist/jquery.js',
+    'pace':           'PACE/pace.js',
+    'bootstrap':      'bootstrap-sass/assets/javascripts/bootstrap.js',
+    'classie':        'classie/classie.js',
+    'animatedheader': 'AnimatedHeader/js/cbpAnimatedHeader.js',
+    'wow':            'wow/dist/wow.js',
+    'respond':        'respond/dest/respond.src.js',
+    'html5shiv':      'html5shiv/dist/html5shiv.js'
+  };
+
+  if(!pkgs[pkg]) {
+    throw "couldnt find package named '" + pkg + "'";
+  }
+
+  return bowerRoot + '/' + pkgs[pkg];
+}
+
 var javascripts = {
   "all.js": [
-    'bower_components/jquery/dist/jquery.js',
-    'bower_components/PACE/pace.js',
-    'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-    'bower_components/classie/classie.js',
-    'bower_components/AnimatedHeader/js/cbpAnimatedHeader.js',
-    'bower_components/wow/dist/wow.js',
-    'vendor/javascripts/inspinia.js',
-    'source/javascripts/all.js'
+    bowerComponent('jquery'),
+    bowerComponent('pace'),
+    bowerComponent('bootstrap'),
+    bowerComponent('classie'),
+    bowerComponent('animatedheader'),
+    bowerComponent('wow'),
+    'vendor/inspinia/javascripts/inspinia.js'
   ],
   "ie.js": [
-    'bower_components/respond/dest/respond.src.js',
-    'bower_components/html5shiv/dist/html5shiv.js',
-    'vendor/javascripts/placeholder-IE-fixes.js'
+    bowerComponent('respond'),
+    bowerComponent('html5shiv'),
+    'vendor/inspinia/javascripts/placeholder-IE-fixes.js'
   ]
 };
 
 var fonts = [
-  'bower_components/font-awesome/fonts/*',
-  'bower_components/bootstrap-sass/assets/fonts/**/*'
+  bowerRoot + '/font-awesome/fonts/*',
+  bowerRoot + '/bootstrap-sass/assets/fonts/**/*'
 ];
 
 gulp.task('default', ['build', 'watch']);
@@ -44,25 +64,22 @@ gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
 gulp.task('javascripts', ['all.js', 'ie.js']);
 gulp.task('stylesheets', ['all.css']);
 
-gulp.task('all.js', function() {
-  return gulp
-    .src(javascripts['all.js'])
-    .pipe(sourcemaps.init())
-    .pipe(concat('all.js'))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(js_output_dir));
-});
+function jsTask(name) {
+  var filename = name + '.js';
 
-gulp.task('ie.js', function() {
-  return gulp
-    .src(javascripts['ie.js'])
+  gulp.task(filename, function() {
+    return gulp
+    .src(javascripts[filename])
     .pipe(sourcemaps.init())
-    .pipe(concat('ie.js'))
+    .pipe(concat(filename))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(js_output_dir));
-});
+  });
+}
+
+jsTask('all');
+jsTask('ie');
 
 gulp.task('all.css', function() {
   return gulp
