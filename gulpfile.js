@@ -1,7 +1,10 @@
+'use strict';
+
 var gulp       = require('gulp'),
   concat       = require('gulp-concat'),
   uglify       = require('gulp-uglify'),
   postcss      = require('gulp-postcss'),
+  sass         = require('gulp-sass'),
   autoprefixer = require('autoprefixer'),
   cssnano      = require('cssnano'),
   del          = require('del');
@@ -35,13 +38,16 @@ var stylesheets = {
     'vendor/stylesheets/animate.min.css',
     'vendor/stylesheets/font-awesome.css',
     'vendor/stylesheets/style.css',
+    'intermediate/stylesheets/demo.css'
   ]
 };
 
 gulp.task('default', ['build', 'watch']);
-gulp.task('build', ['javascripts', 'stylesheets']);
+gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
+
 gulp.task('javascripts', ['all.js', 'ie.js']);
-gulp.task('stylesheets', ['all.css']);
+gulp.task('stylesheets', ['sass', 'all.css']);
+gulp.task('fonts', ['fonts:fontawesome']);
 
 gulp.task('all.js', function() {
   return gulp
@@ -59,6 +65,13 @@ gulp.task('ie.js', function() {
     .pipe(gulp.dest(js_output_dir));
 });
 
+gulp.task('sass', function() {
+  return gulp
+    .src('assets/stylesheets/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('intermediate/stylesheets'));
+});
+
 gulp.task('all.css', function() {
   return gulp
     .src(stylesheets['all.css'])
@@ -70,10 +83,8 @@ gulp.task('all.css', function() {
     .pipe(gulp.dest(css_output_dir));
 });
 
-gulp.task('fonts', ['fonts:fontawesome']);
-
 gulp.task('fonts:fontawesome', function() {
-  return gulp.src('bower_components/font-awesome/fonts/fontawesome-webfont.*')
+  return gulp.src('bower_components/font-awesome/fonts/*')
   .pipe(gulp.dest(font_output_dir));
 });
 
@@ -81,6 +92,11 @@ gulp.task('watch', function() {
   gulp.watch(javascripts['all.js'], ['all.js']);
   gulp.watch(javascripts['ie.js'],  ['ie.js']);
   gulp.watch(stylesheets['all.css'], ['all.css']);
+
+  glup.watch('assets/stylesheets/*.scss', ['sass']);
+
+  // Watch bower components for changes.
+  gulp.watch(['bower_components/font-awesome'], ['fonts:fontawesome']);
 });
 
 gulp.task('clean', function() {
