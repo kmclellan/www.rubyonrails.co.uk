@@ -18,7 +18,7 @@ var output_dir   = 'intermediate',
 var javascripts = {
   "all.js": [
     'bower_components/jquery/dist/jquery.js',
-    'vendor/javascripts/pace.min.js',
+    'bower_components/PACE/pace.js',
     'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
     'vendor/javascripts/classie.js',
     'vendor/javascripts/cbpAnimatedHeader.js',
