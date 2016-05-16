@@ -24,7 +24,7 @@ var javascripts = {
     'vendor/javascripts/cbpAnimatedHeader.js',
     'vendor/javascripts/wow.min.js',
     'vendor/javascripts/inspinia.js',
-    'assets/javascripts/all.js'
+    'source/javascripts/all.js'
   ],
   "ie.js": [
     'vendor/javascripts/respond.js',
@@ -67,13 +67,13 @@ gulp.task('ie.js', function() {
 gulp.task('all.css', function() {
   return gulp
     .src([
-      'assets/stylesheets/*.scss',
+      'source/stylesheets/*.scss',
       'bower_components/animate.css/animate.css'
     ])
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
-        'assets/stylesheets',
+        'source/stylesheets',
         'bower_components/bootstrap-sass/assets/stylesheets',
         'bower_components/font-awesome/scss',
         'vendor/inspinia/scss'
@@ -98,7 +98,7 @@ gulp.task('watch', function() {
   gulp.watch(javascripts['ie.js'],  ['ie.js']);
 
   gulp.watch([
-    'assets/stylesheets/**/*.scss',
+    'source/stylesheets/**/*.scss',
     'bower_components/animate.css/animate.css',
     'bower_components/bootstrap-sass/assets/stylesheets/**/*.scss',
     'bower_components/font-awesome/scss/**/*.scss'
