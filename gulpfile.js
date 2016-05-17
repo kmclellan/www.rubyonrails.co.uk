@@ -42,7 +42,7 @@ var javascripts = {
     'pace',
     'bootstrap',
     'classie',
-    'animatedheader',
+    'AnimatedHeader',
     'wow',
     'inspinia'
   ].map(function(pkg) { return component(pkg, 'js') }),
@@ -121,7 +121,7 @@ gulp.task('clean', function() {
 function component(pkg, kind) {
   var [ p, f ] = pkg.split('/');
 
-  if(p == 'inspinia') {
+  if(p == 'inspinia' || p == 'AnimatedHeader') {
     if(f) {
       return vendorComponent(p, kind, f);
     } else {
@@ -156,9 +156,6 @@ function bowerComponent(pkg, kind) {
     'classie': {
       'js': 'classie/classie.js'
     },
-    'animatedheader': {
-      'js': 'AnimatedHeader/js/cbpAnimatedHeader.js'
-    },
     'wow': {
       'js': 'wow/dist/wow.js'
     },
@@ -190,6 +187,11 @@ function vendorComponent(pkg, kind, file = 'default') {
         'placeholder': 'javascripts/placeholder-IE-fixes.js'
       },
       'scss': { 'default': 'scss' }
+    },
+    'AnimatedHeader': {
+      'js': {
+        'default': 'js/cbpAnimatedHeader.js'
+      }
     }
   }
 
