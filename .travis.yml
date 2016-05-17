@@ -11,7 +11,7 @@ install: rake deps
 deploy:
   provider: script
   skip_cleanup: true
-  script: (bundle install && bundle exec rake deps deploy) || env
+  script: "(rvm use $(< .ruby-version) --install --binary --fuzzy && bundle exec rake deploy) || env"
   on:
     branch: master
 notifications:
