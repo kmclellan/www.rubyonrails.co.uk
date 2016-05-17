@@ -10,7 +10,7 @@ task :build do
   middleman :build
 end
 
-task deploy: :build do
+task :deploy do
   middleman :sync
   middleman :invalidate
 end
