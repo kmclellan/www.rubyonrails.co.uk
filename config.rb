@@ -21,6 +21,7 @@ page '/*.txt', layout: false
 activate :directory_indexes
 activate :asset_hash
 activate :gzip
+activate :automatic_image_sizes
 
 activate :s3_sync do |s3|
   s3.bucket                = config[:hostname]
