@@ -1,5 +1,7 @@
 # UK Ruby on Rails Consulting
 
+[![Build Status](https://travis-ci.org/wossname/www.rubyonrails.co.uk.svg?branch=master)](https://travis-ci.org/wossname/www.rubyonrails.co.uk)
+
 I've put together a wee static web site for <https://www.rubyonrails.co.uk/> as
 I've owned the domain name for ~7 years now and haven't gotten around to doing
 anything with it. I thought I might as well use it to try and pimp my
