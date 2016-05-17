@@ -11,7 +11,7 @@ install: rake deps
 deploy:
   provider: script
   skip_cleanup: true
-  script: bundle exec rake deploy
+  script: (bundle install && bundle exec rake deps deploy) || env
   on:
     branch: master
 notifications:
