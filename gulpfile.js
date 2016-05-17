@@ -6,16 +6,18 @@ var gulp       = require('gulp'),
   concat       = require('gulp-concat'),
   uglify       = require('gulp-uglify'),
   postcss      = require('gulp-postcss'),
-  sass         = require('gulp-sass'),
+  sass         = require('gulp-ruby-sass'),
   autoprefixer = require('autoprefixer'),
   cssnano      = require('cssnano'),
-  del          = require('del');
+  del          = require('del'),
+  merge        = require('merge-stream');
 
 // Where things live.
 var sourceDir = 'source',
   scssSourceDir = sourceDir + '/stylesheets';
 
-var scssIncludePath = [
+
+var scssLoadPath = [
   scssSourceDir,
   component('bootstrap', 'scss'),
   component('fontawesome', 'scss'),
@@ -30,8 +32,13 @@ var outputDir    = 'intermediate',
 // What goes into the built stylesheets.
 var stylesheets = {
   "all.css": [
-    addGlob(scssSourceDir, 'scss'),
     component('animate', 'css')
+  ]
+}
+
+var sassFiles = {
+  "all.css": [
+    addGlob(scssSourceDir, 'scss'),
   ]
 }
 
@@ -79,17 +86,19 @@ Object.keys(javascripts).map(jsTask);
 
 function cssTask(filename) {
   return gulp.task(filename, function() {
-    return gulp
-    .src(stylesheets[filename])
-    .pipe(sourcemaps.init())
-    .pipe(sass({ includePaths: scssIncludePath }))
-    .pipe(concat(filename))
-    .pipe(postcss([
-      autoprefixer(),
-      cssnano()
-    ]))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(cssOutputDir + '/'));
+    var sassPipe = sass(sassFiles[filename], { loadPath: scssLoadPath, sourcemap: true });
+
+    var cssPipe  = gulp.src(stylesheets[filename])
+      .pipe(sourcemaps.init());
+
+    return merge(sassPipe, cssPipe)
+      .pipe(concat(filename))
+      .pipe(postcss([
+        autoprefixer(),
+        cssnano()
+      ]))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest(cssOutputDir + '/'));
   });
 }
 
@@ -105,9 +114,9 @@ gulp.task('watch', function() {
     gulp.watch(javascripts[task], [task]);
   }
 
-  var scssIncludePathGlobs = scssIncludePath.map(function(path) { return addGlob(path) });
+  var scssLoadPathGlobs = scssLoadPath.map(function(path) { return addGlob(path) });
   for(var task in stylesheets) {
-    var globs = stylesheets[task].concat(scssIncludePathGlobs);
+    var globs = stylesheets[task].concat(scssLoadPathGlobs);
     gulp.watch(globs, [task]);
   }
 
@@ -115,6 +124,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', function() {
+  sass.clearCache();
   return del([outputDir]);
 });
 
