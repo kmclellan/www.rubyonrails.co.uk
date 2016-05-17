@@ -1,5 +1,6 @@
 'use strict';
 
+// Gulp modules, et al, that I'm using.
 var gulp       = require('gulp'),
   sourcemaps   = require('gulp-sourcemaps'),
   concat       = require('gulp-concat'),
@@ -10,122 +11,199 @@ var gulp       = require('gulp'),
   cssnano      = require('cssnano'),
   del          = require('del');
 
-var output_dir   = 'intermediate',
-  js_output_dir  = output_dir + '/javascripts/',
-  css_output_dir = output_dir + '/stylesheets/',
-  font_output_dir = output_dir + '/fonts/';
+// Where things live.
+var sourceDir = 'source',
+  scssSourceDir = sourceDir + '/stylesheets';
 
-var bowerRoot = 'bower_components';
-
-function bowerComponent(pkg) {
-  var pkgs = {
-    'jquery':         'jquery/dist/jquery.js',
-    'pace':           'PACE/pace.js',
-    'bootstrap':      'bootstrap-sass/assets/javascripts/bootstrap.js',
-    'classie':        'classie/classie.js',
-    'animatedheader': 'AnimatedHeader/js/cbpAnimatedHeader.js',
-    'wow':            'wow/dist/wow.js',
-    'respond':        'respond/dest/respond.src.js',
-    'html5shiv':      'html5shiv/dist/html5shiv.js',
-    'animate':        'animate.css/animate.css'
-  };
-
-  if(!pkgs[pkg]) {
-    throw "couldnt find package named '" + pkg + "'";
-  }
-
-  return bowerRoot + '/' + pkgs[pkg];
-}
-
-var javascripts = {
-  "all.js": [
-    bowerComponent('jquery'),
-    bowerComponent('pace'),
-    bowerComponent('bootstrap'),
-    bowerComponent('classie'),
-    bowerComponent('animatedheader'),
-    bowerComponent('wow'),
-    'vendor/inspinia/javascripts/inspinia.js'
-  ],
-  "ie.js": [
-    bowerComponent('respond'),
-    bowerComponent('html5shiv'),
-    'vendor/inspinia/javascripts/placeholder-IE-fixes.js'
-  ]
-};
-
-var fonts = [
-  bowerRoot + '/font-awesome/fonts/*',
-  bowerRoot + '/bootstrap-sass/assets/fonts/**/*'
+var scssIncludePath = [
+  scssSourceDir,
+  component('bootstrap', 'scss'),
+  component('fontawesome', 'scss'),
+  component('inspinia', 'scss')
 ];
 
+var outputDir    = 'intermediate',
+  jsOutputDir   = outputDir + '/javascripts',
+  cssOutputDir  = outputDir + '/stylesheets',
+  fontOutputDir = outputDir + '/fonts';
+
+// What goes into the built stylesheets.
+var stylesheets = {
+  "all.css": [
+    addGlob(scssSourceDir, 'scss'),
+    component('animate', 'css')
+  ]
+}
+
+// What goes into the built javascripts.
+var javascripts = {
+  "all.js": [
+    'jquery',
+    'pace',
+    'bootstrap',
+    'classie',
+    'animatedheader',
+    'wow',
+    'inspinia'
+  ].map(function(pkg) { return component(pkg, 'js') }),
+  "ie.js": [
+    'respond',
+    'html5shiv',
+    'inspinia/placeholder'
+  ].map(function(pkg) { return component(pkg, 'js') })
+};
+
+// The fonts we want to be built.
+var fonts = ['fontawesome', 'bootstrap'].map(function(pkg) { return addGlob(component(pkg, 'fonts')); });
+
+// A set of generic tasks to do specific parts of the build.
 gulp.task('default', ['build', 'watch']);
 gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
 
-gulp.task('javascripts', ['all.js', 'ie.js']);
-gulp.task('stylesheets', ['all.css']);
+gulp.task('javascripts', Object.keys(javascripts));
+gulp.task('stylesheets', Object.keys(stylesheets));
 
-function jsTask(name) {
-  var filename = name + '.js';
-
-  gulp.task(filename, function() {
+function jsTask(filename) {
+  return gulp.task(filename, function() {
     return gulp
     .src(javascripts[filename])
     .pipe(sourcemaps.init())
     .pipe(concat(filename))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(js_output_dir));
+    .pipe(gulp.dest(jsOutputDir + '/'));
   });
 }
 
-jsTask('all');
-jsTask('ie');
+Object.keys(javascripts).map(jsTask);
 
-gulp.task('all.css', function() {
-  return gulp
-    .src([
-      'source/stylesheets/*.scss',
-      bowerComponent('animate')
-    ])
+function cssTask(filename) {
+  return gulp.task(filename, function() {
+    return gulp
+    .src(stylesheets[filename])
     .pipe(sourcemaps.init())
-    .pipe(sass({
-      includePaths: [
-        'source/stylesheets',
-        bowerRoot + '/bootstrap-sass/assets/stylesheets',
-        bowerRoot + '/font-awesome/scss',
-        'vendor/inspinia/scss'
-      ]
-    }))
-    .pipe(concat('all.css'))
+    .pipe(sass({ includePaths: scssIncludePath }))
+    .pipe(concat(filename))
     .pipe(postcss([
       autoprefixer(),
       cssnano()
     ]))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(css_output_dir));
-});
+    .pipe(gulp.dest(cssOutputDir + '/'));
+  });
+}
+
+Object.keys(stylesheets).map(cssTask);
 
 gulp.task('fonts', function() {
   return gulp.src(fonts)
-  .pipe(gulp.dest(font_output_dir));
+  .pipe(gulp.dest(fontOutputDir + '/'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(javascripts['all.js'], ['all.js']);
-  gulp.watch(javascripts['ie.js'],  ['ie.js']);
+  for(var task in javascripts) {
+    gulp.watch(javascripts[task], [task]);
+  }
 
-  gulp.watch([
-    'source/stylesheets/**/*.scss',
-    bowerRoot + '/animate.css/animate.css',
-    bowerRoot + '/bootstrap-sass/assets/stylesheets/**/*.scss',
-    bowerRoot + '/font-awesome/scss/**/*.scss'
-  ], ['stylesheets']);
+  var scssIncludePathGlobs = scssIncludePath.map(function(path) { return addGlob(path) });
+  for(var task in stylesheets) {
+    var globs = stylesheets[task].concat(scssIncludePathGlobs);
+    gulp.watch(globs, [task]);
+  }
 
-  // Watch bower components for changes.
-  gulp.watch([fonts], ['fonts']);
+  gulp.watch(fonts, ['fonts']);
 });
 
 gulp.task('clean', function() {
-  return del([output_dir]);
+  return del([outputDir]);
 });
+
+function component(pkg, kind) {
+  var [ p, f ] = pkg.split('/');
+
+  if(p == 'inspinia') {
+    if(f) {
+      return vendorComponent(p, kind, f);
+    } else {
+      return vendorComponent(p, kind);
+    }
+  } else {
+    return bowerComponent(pkg, kind);
+  }
+}
+
+// Map the utterly non-standard package format to a list of files of a
+// particular type for a package.
+function bowerComponent(pkg, kind) {
+  var bowerRoot = 'bower_components';
+
+  var pkgs = {
+    'jquery': {
+      'js': 'jquery/dist/jquery.js'
+    },
+    'pace': {
+      'js': 'PACE/pace.js'
+    },
+    'fontawesome': {
+      'fonts': 'font-awesome/fonts',
+      'scss':  'font-awesome/scss'
+    },
+    'bootstrap': {
+      'js':    'bootstrap-sass/assets/javascripts/bootstrap.js',
+      'fonts': 'bootstrap-sass/assets/fonts',
+      'scss':  'bootstrap-sass/assets/stylesheets'
+    },
+    'classie': {
+      'js': 'classie/classie.js'
+    },
+    'animatedheader': {
+      'js': 'AnimatedHeader/js/cbpAnimatedHeader.js'
+    },
+    'wow': {
+      'js': 'wow/dist/wow.js'
+    },
+    'respond': {
+      'js': 'respond/dest/respond.src.js'
+    },
+    'html5shiv': {
+      'js': 'html5shiv/dist/html5shiv.js'
+    },
+    'animate': {
+      'css': 'animate.css/animate.css'
+    }
+  };
+
+  if(!pkgs[pkg] || !pkgs[pkg][kind]) {
+    throw "couldnt find " + kind + " for package named '" + pkg + "'";
+  }
+
+  return bowerRoot + '/' + pkgs[pkg][kind];
+}
+
+function vendorComponent(pkg, kind, file = 'default') {
+  var vendorRoot = 'vendor';
+
+  var pkgs = {
+    'inspinia': {
+      'js': {
+        'default': 'javascripts/inspinia.js',
+        'placeholder': 'javascripts/placeholder-IE-fixes.js'
+      },
+      'scss': { 'default': 'scss' }
+    }
+  }
+
+  if(!pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]) {
+    throw "couldnt find " + kind + " for package named '" + pkg + "'";
+  }
+
+  return vendorRoot + '/' + pkg + '/' + pkgs[pkg][kind][file];
+}
+
+function addGlob(path, extension) {
+  if(extension) {
+    return path + '/**/*.' + extension;
+  } else {
+    return path + '/**/*';
+  }
+}
