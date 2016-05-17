@@ -1,25 +1,47 @@
 task default: :build
 
 task :deps do
-  sh 'bundle install'
-  sh 'npm install'
-  sh 'node_modules/bower/bin/bower install'
+  bundle :install
+  npm    :install
+  bower  :install
 end
 
 task :build do
-  sh 'bundle exec middleman build'
+  middleman :build
 end
 
 task deploy: :build do
-  sh 'bundle exec middleman sync'
-  sh 'bundle exec middleman invalidate'
+  middleman :sync
+  middleman :invalidate
 end
 
 task :clean do
-  sh 'gulp clean'
+  gulp :clean
   sh 'rm -rf build'
 end
 
 task distclean: :clean do
-  sh 'gulp distclean'
+  gulp :distclean
+end
+
+def bundle(command, args = '')
+  sh "bundle #{command} #{args}"
+end
+
+def middleman(command)
+  middleman_args = (verbose == true) ? '--verbose' : ''
+
+  bundle :exec, "middleman #{command} #{middleman_args}"
+end
+
+def gulp(task)
+  sh "node_modules/gulp/bin/gulp.js #{task}"
+end
+
+def bower(command)
+  sh "node_modules/bower/bin/bower #{command}"
+end
+
+def npm(command)
+  sh "npm #{command}"
 end
