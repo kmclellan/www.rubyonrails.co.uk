@@ -20,7 +20,7 @@
           </div>
           <div class="comments-avatar">
             <a href="<%= testimonial.linked_in_url %>" title="<%= [ testimonial.name, testimonial.job_title ].compact.join(', ') %>" class="pull-left">
-              <img alt="<%= [ testimonial.name, testimonial.job_title ].compact.join(', ') %>" src="<%= testimonial.image_url %>">
+              <%= image_tag testimonial.image_url || 'ghost.png', alt: [ testimonial.name, testimonial.job_title ].compact.join(', ') %>
             </a>
             <div class="media-body">
               <div class="commens-name">

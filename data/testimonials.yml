@@ -3,7 +3,7 @@ semanticist:
   job_title: DevOps Engineer
   company: itison.com
   company_url: https://www.itison.com/
-  image_url: https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/08c/203/2aa56bd.jpg
+  image_url: semanticist.jpg
   linked_in_url: https://www.linkedin.com/in/semanticist
   text: |
     Graeme acted as a technical consultant to Sourcerail, providing me with
@@ -16,7 +16,7 @@ semanticist:
 mr_urf:
   name: Alan Gardner
   job_title: Senior Software Developer
-  image_url: https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/097/3e2/1153952.jpg
+  image_url: mr_urf.jpg
   linked_in_url: https://www.linkedin.com/in/alancgardner
   text: |
     I did some Ruby on Rails development work for Graeme recently, which was
@@ -31,7 +31,6 @@ kelly:
   job_title: Owner
   company: A+ Tutors
   company_url: http://aplustutors.co.uk/
-  image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
   linked_in_url: https://www.linkedin.com/in/kellymclellan
   text: |
     Highly recommended. I really enjoy working with Graeme. He is extremely
@@ -44,7 +43,6 @@ tj:
   name: T.J. Sheehy
   job_title: Director
   company: Klir Limited
-  image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
   linked_in_url: https://www.linkedin.com/in/tjsheehy
   text: |
     It was great working with Graeme. If you go to him with anything, he'll
@@ -53,7 +51,7 @@ tj:
 ryan:
   name: Ryan Stenhouse
   job_title: Ruby developer, speaker, and coach
-  image_url: https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAICAAAAJGM2YWE3MDVkLWE0OTEtNGNkYi05YWIwLTdlNzMyNGJhNzQ0MQ.jpg
+  image_url: ryan.jpg
   linked_in_url: https://www.linkedin.com/in/ryanstenhouse
   text: |
     Graeme is one of the most patient, meticulous, laid back and approachable
@@ -65,7 +63,7 @@ bben:
   name: Benjamin Brinckerhoff
   job_title: Lead Software Engineer
   company: Figly
-  image_url: https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/000/003/009/08c07d4.jpg
+  image_url: bben.jpg
   linked_in_url: https://www.linkedin.com/in/benjaminbrinckerhoff
   text: |
     Graeme is a top-notch engineer who possesses vast and detailed knowledge
@@ -74,7 +72,7 @@ bben:
 craig_webster:
   name: Craig Webster
   job_title: Ruby &amp; DevOps Consultant
-  image_url: https://media.licdn.com/media/p/3/000/006/0f0/294b1a1.jpg
+  image_url: craig_webster.jpg
   linked_in_url: https://www.linkedin.com/in/craigwebster
   text: |
     It's rare enough to find someone that's good at one role, but Graeme
@@ -95,7 +93,6 @@ btmh:
   job_title: Head of Fellowship &amp; Membership Services
   company: Royal College of Physicians of Edinburgh
   company_url: http://www.rcpe.ac.uk/
-  image_url: https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_60x60_v1.png
   linked_in_url: https://www.linkedin.com/in/graememcalister
   text: |
     The Behind the Medical Headlines site was a fairly successful pilot which
@@ -122,7 +119,7 @@ graham_savage:
   name: Graham Savage
   job_title: Chief Technical Officer
   company: Azalea Innovations
-  image_url: https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAeYAAAAJDE4Y2U3MTJmLTM2NTgtNDVhNC1iZWM1LWEwYzY3ZjhhYzBjOA.jpg
+  image_url: graham_savage.jpg
   linked_in_url: https://www.linkedin.com/in/grahamsavage
   text: |
     Azalea Innovations has used Graeme on a number of occassions, most usually
