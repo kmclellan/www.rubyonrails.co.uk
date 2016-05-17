@@ -14,3 +14,12 @@ task deploy: :build do
   sh 'bundle exec middleman sync'
   sh 'bundle exec middleman invalidate'
 end
+
+task :clean do
+  sh 'gulp clean'
+  sh 'rm -rf build'
+end
+
+task distclean: :clean do
+  sh 'gulp distclean'
+end

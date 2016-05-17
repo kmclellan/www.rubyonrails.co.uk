@@ -13,8 +13,9 @@ var gulp       = require('gulp'),
   merge        = require('merge-stream');
 
 // Where things live.
-var sourceDir = 'source',
-  scssSourceDir = sourceDir + '/stylesheets';
+var sourceDir   = 'source',
+  scssSourceDir = sourceDir + '/stylesheets',
+  bowerRoot     = 'bower_components';
 
 
 var scssLoadPath = [
@@ -128,6 +129,14 @@ gulp.task('clean', function() {
   return del([outputDir]);
 });
 
+gulp.task('distclean', ['clean'], function() {
+  return del([
+    bowerRoot,
+    'node_modules',
+    '.sass-cache'
+  ]);
+});
+
 function component(pkg, kind) {
   var [ p, f ] = pkg.split('/');
 
@@ -145,8 +154,6 @@ function component(pkg, kind) {
 // Map the utterly non-standard package format to a list of files of a
 // particular type for a package.
 function bowerComponent(pkg, kind) {
-  var bowerRoot = 'bower_components';
-
   var pkgs = {
     'jquery': {
       'js': 'jquery/dist/jquery.js'
