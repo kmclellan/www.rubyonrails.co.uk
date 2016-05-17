@@ -1,0 +1,28 @@
+{
+  "name": "www.rubyonrails.co.uk",
+  "description": "Ruby on Rails Consulting",
+  "main": "",
+  "authors": [
+    "Graeme Mathieson"
+  ],
+  "license": "MIT",
+  "homepage": "https://www.rubyonrails.co.uk/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.6.3",
+    "bootstrap-sass": "bootstrap-sass-official#3.3.1",
+    "html5shiv": "^3.7.3",
+    "animate.css": "^3.5.1",
+    "PACE": "pace#^1.0.2",
+    "classie": "^1.0.1",
+    "wow": "^1.1.2",
+    "respond": "^1.4.2"
+  }
+}

@@ -1,0 +1,39 @@
+// Basic Colors
+$navy: #1ab394 !default;       // Primary color
+$dark-gray: #c2c2c2 !default;  // Default color
+$blue: #1c84c6 !default;       // Success color
+$lazur: #23c6c8 !default;      // Info color
+$yellow: #f8ac59 !default;     // Warrning color
+$red: #ED5565 !default;        // Danger color
+
+// Various colors
+$text-color: #676a6c !default;   // Body text
+$gray: #f3f3f4 !default;         // Background wrapper color
+$light-gray: #D1DADE !default;   // Default label, badget
+$label-badget-color: #5E5E5E !default;
+$light-blue:#f3f6fb !default;
+
+// Spiner color and margin
+$spin-color: $navy;
+$spin-margin: 0 auto;
+
+
+// IBOX colors ( default panel colors)
+$border-color: #e7eaec !default;     // IBox border
+$ibox-title-bg:#ffffff !default;     // IBox Background header
+$ibox-content-bg:#ffffff !default;   // IBox Background content
+
+//Sidebar width
+$sidebar-width: 220px !default;
+
+// Boxed layout width
+$boxed-width: 1200px !default;
+$boxed-backgound: url('patterns/shattered.png');
+
+//Border radius for buttons
+$btn-border-radius: 3px !default;
+
+//Navigation
+$nav-bg: #2F4050 !default;
+$nav-profil-pattern: url("patterns/header-profile.png") no-repeat;
+$nav-text-color: #a7b1c2 !default;

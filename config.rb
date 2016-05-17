@@ -45,7 +45,7 @@ default_caching_policy max_age: (60 * 60 * 24 * 365)
 
 activate :external_pipeline,
   name: :gulp,
-  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build' : ''}",
+  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build' : 'serve'}",
   source: 'intermediate/'
 
 # Build-specific configuration
