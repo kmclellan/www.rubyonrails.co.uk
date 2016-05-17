@@ -65,28 +65,47 @@ var javascripts = {
 var fonts = ['fontawesome', 'bootstrap'].map(function(pkg) { return addGlob(component(pkg, 'fonts')); });
 
 // A set of generic tasks to do specific parts of the build.
-gulp.task('default', ['build', 'watch']);
-gulp.task('build', ['fonts', 'javascripts', 'stylesheets']);
+gulp.task('default', ['build']);
+gulp.task('build', ['build:production']);
+gulp.task('serve', ['build:development', 'watch']);
 
-gulp.task('javascripts', Object.keys(javascripts));
-gulp.task('stylesheets', Object.keys(stylesheets));
+var environments = [ 'development', 'production' ];
+for(var i in environments) {
+  var environment = environments[i];
 
-function jsTask(filename) {
-  return gulp.task(filename, function() {
+  gulp.task('build:' + environment, ['fonts', 'javascripts', 'stylesheets'].map(function(task) { return 'build:' + task + ':' + environment }));
+  gulp.task('build:javascripts:' + environment, Object.keys(javascripts).map(function(task) { return 'build:javascripts:' + task + ':' + environment }));
+  gulp.task('build:stylesheets:' + environment, Object.keys(stylesheets).map(function(task) { return 'build:stylesheets:' + task + ':' + environment }));
+
+  gulp.task('build:fonts:' + environment, function() {
+    return gulp.src(fonts)
+    .pipe(gulp.dest(fontOutputDir + '/'));
+  });
+}
+
+function jsTasks(filename) {
+  gulp.task('build:javascripts:' + filename + ':development', function() {
     return gulp
     .src(javascripts[filename])
     .pipe(sourcemaps.init())
     .pipe(concat(filename))
-    .pipe(uglify())
     .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(jsOutputDir + '/'));
+  });
+
+  gulp.task('build:javascripts:' + filename + ':production', function() {
+    return gulp
+    .src(javascripts[filename])
+    .pipe(concat(filename))
+    .pipe(uglify())
     .pipe(gulp.dest(jsOutputDir + '/'));
   });
 }
 
-Object.keys(javascripts).map(jsTask);
+Object.keys(javascripts).map(jsTasks);
 
-function cssTask(filename) {
-  return gulp.task(filename, function() {
+function cssTasks(filename) {
+  gulp.task('build:stylesheets:' + filename + ':development', function() {
     var sassPipe = sass(sassFiles[filename], { loadPath: scssLoadPath, sourcemap: true });
 
     var cssPipe  = gulp.src(stylesheets[filename])
@@ -94,34 +113,39 @@ function cssTask(filename) {
 
     return merge(sassPipe, cssPipe)
       .pipe(concat(filename))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest(cssOutputDir + '/'));
+  });
+
+  gulp.task('build:stylesheets:' + filename + ':production', function() {
+    var sassPipe = sass(sassFiles[filename], { loadPath: scssLoadPath });
+
+    var cssPipe  = gulp.src(stylesheets[filename]);
+
+    return merge(sassPipe, cssPipe)
+      .pipe(concat(filename))
       .pipe(postcss([
         autoprefixer(),
         cssnano()
       ]))
-      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest(cssOutputDir + '/'));
   });
 }
 
-Object.keys(stylesheets).map(cssTask);
-
-gulp.task('fonts', function() {
-  return gulp.src(fonts)
-  .pipe(gulp.dest(fontOutputDir + '/'));
-});
+Object.keys(stylesheets).map(cssTasks);
 
 gulp.task('watch', function() {
   for(var task in javascripts) {
-    gulp.watch(javascripts[task], [task]);
+    gulp.watch(javascripts[task], ['build:javascripts:' + task + ':development']);
   }
 
   var scssLoadPathGlobs = scssLoadPath.map(function(path) { return addGlob(path) });
   for(var task in stylesheets) {
     var globs = stylesheets[task].concat(scssLoadPathGlobs);
-    gulp.watch(globs, [task]);
+    gulp.watch(globs, ['build:stylesheets:' + task + ':development']);
   }
 
-  gulp.watch(fonts, ['fonts']);
+  gulp.watch(fonts, ['build:fonts:development']);
 });
 
 gulp.task('clean', function() {
