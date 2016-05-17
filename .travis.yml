@@ -11,7 +11,7 @@ install: rake deps
 deploy:
   provider: script
   skip_cleanup: true
-  script: rvm do bundle exec rake deploy
+  script: "rvm $(< .ruby-version) do bundle exec rake deploy"
   on:
     branch: master
 notifications:
