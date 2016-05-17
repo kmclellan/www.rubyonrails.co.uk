@@ -6,7 +6,7 @@ cache:
   - build
   - node_modules
   - bower_components
-before_install: nvm install v5.11.1
+before_install: nvm install v6.0.0
 install: rake deps
 deploy:
   provider: script
