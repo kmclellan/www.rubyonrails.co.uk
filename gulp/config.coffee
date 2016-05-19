@@ -27,6 +27,8 @@ module.exports =
         'aws'
         'amazon'
         'jsbn'
+        'sjcl'
+        'moment'
         'inspinia'
       ]
       ie: [

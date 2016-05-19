@@ -41,6 +41,10 @@ bowerComponent = (pkg, kind) ->
         'jsbn/jsbn.js'
         'jsbn/jsbn2.js'
       ]
+    sjcl:
+      js: 'sjcl/sjcl.js'
+    moment:
+      js: 'moment/moment.js'
 
   if !pkgs[pkg] || !pkgs[pkg][kind]
     throw "couldnt find " + kind + " for package named '" + pkg + "'"
