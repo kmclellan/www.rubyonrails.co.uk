@@ -25,6 +25,7 @@ module.exports =
         'AnimatedHeader'
         'wow'
         'aws'
+        'amazon'
         'inspinia'
       ]
       ie: [

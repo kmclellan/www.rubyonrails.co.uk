@@ -14,7 +14,7 @@ javascriptFilesFor = (filename) ->
 
 jsTasks = (filename) ->
   gulp.task "build:javascripts:#{filename}:development", ->
-    gulp.src javascriptFilesFor filename
+    gulp.src javascriptFilesFor(filename).concat(["#{config.sourceDir}/javascripts/#{filename}.js"])
       .pipe sourcemaps.init()
       .pipe concat "#{filename}.js"
       .pipe sourcemaps.write '.'

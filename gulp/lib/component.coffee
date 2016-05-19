@@ -3,7 +3,7 @@ config = require '../config'
 module.exports = (pkg, kind) ->
   [ p, f ] = pkg.split('/')
 
-  if p in [ 'inspinia', 'AnimatedHeader' ]
+  if p in [ 'inspinia', 'AnimatedHeader', 'amazon' ]
     if f
       vendorComponent(p, kind, f)
     else
@@ -57,6 +57,9 @@ vendorComponent = (pkg, kind, file = 'default') ->
     AnimatedHeader:
       js:
         default: 'js/cbpAnimatedHeader.js'
+    amazon:
+      js:
+        default: 'javascripts/amazon-cognito.min.js'
 
   if !pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]
     throw "couldnt find #{kind} for package named '#{pkg}'."
