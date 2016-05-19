@@ -18,7 +18,9 @@ scssSourceGlob = addGlob scssSourceDir, 'scss'
 scssLoadPath = [ scssSourceDir ].concat config.scssModules.map (pkg) -> component pkg, 'scss'
 scssLoadPathGlobs = scssLoadPath.map (path) -> addGlob path
 
-stylesheetFilesFor = (filename) -> config.assets.stylesheets[filename].map (pkg) -> component pkg, 'css'
+stylesheetFilesFor = (filename) ->
+  [].concat.apply [], config.assets.stylesheets[filename].map (pkg) ->
+    component pkg, 'css'
 
 cssTasks = (filename) ->
   gulp.task "build:stylesheets:#{filename}:development", ->

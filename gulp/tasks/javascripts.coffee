@@ -9,7 +9,7 @@ config     = require '../config'
 jsOutputDir = "#{config.outputDir}/javascripts"
 
 javascriptFilesFor = (filename) ->
-  config.assets.javascripts[filename].map (pkg) ->
+  [].concat.apply [], config.assets.javascripts[filename].map (pkg) ->
     component pkg, 'js'
 
 jsTasks = (filename) ->

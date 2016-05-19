@@ -38,7 +38,11 @@ bowerComponent = (pkg, kind) ->
   if !pkgs[pkg] || !pkgs[pkg][kind]
     throw "couldnt find " + kind + " for package named '" + pkg + "'"
 
-  config.bowerRoot + '/' + pkgs[pkg][kind]
+  files = pkgs[pkg][kind]
+  files = [files] if typeof files is 'string'
+
+  files.map (file) ->
+    "#{config.bowerRoot}/#{file}"
 
 vendorComponent = (pkg, kind, file = 'default') ->
   pkgs =

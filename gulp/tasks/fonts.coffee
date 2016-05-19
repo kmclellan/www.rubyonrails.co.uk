@@ -5,7 +5,11 @@ addGlob   = require '../lib/add_glob'
 component = require '../lib/component'
 
 fontOutputDir = "#{config.outputDir}/fonts"
-fontGlobs = config.assets.fonts.map (pkg) -> addGlob component pkg, 'fonts'
+
+fontGlobs = [].concat.apply [], config.assets.fonts.map (pkg) ->
+  component pkg, 'fonts'
+.map (f) ->
+  addGlob(f)
 
 gulp.task "build:fonts", ->
   gulp.src fontGlobs
