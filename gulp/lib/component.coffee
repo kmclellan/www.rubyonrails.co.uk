@@ -34,6 +34,8 @@ bowerComponent = (pkg, kind) ->
       js: 'html5shiv/dist/html5shiv.js'
     animate:
       css: 'animate.css/animate.css'
+    aws:
+      js: 'aws-sdk/dist/aws-sdk.js'
 
   if !pkgs[pkg] || !pkgs[pkg][kind]
     throw "couldnt find " + kind + " for package named '" + pkg + "'"

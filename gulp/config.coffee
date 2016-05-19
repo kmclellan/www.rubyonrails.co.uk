@@ -24,6 +24,7 @@ module.exports =
         'classie'
         'AnimatedHeader'
         'wow'
+        'aws'
         'inspinia'
       ]
       ie: [
