@@ -12,38 +12,28 @@ module.exports = (pkg, kind) ->
     bowerComponent(pkg, kind)
 
 bowerComponent = (pkg, kind) ->
-  pkgs = {
-    'jquery': {
-      'js': 'jquery/dist/jquery.js'
-    },
-    'pace': {
-      'js': 'PACE/pace.js'
-    },
-    'fontawesome': {
-      'fonts': 'font-awesome/fonts',
-      'scss':  'font-awesome/scss'
-    },
-    'bootstrap': {
-      'js':    'bootstrap-sass/assets/javascripts/bootstrap.js',
-      'fonts': 'bootstrap-sass/assets/fonts',
-      'scss':  'bootstrap-sass/assets/stylesheets'
-    },
-    'classie': {
-      'js': 'classie/classie.js'
-    },
-    'wow': {
-      'js': 'wow/dist/wow.js'
-    },
-    'respond': {
-      'js': 'respond/dest/respond.src.js'
-    },
-    'html5shiv': {
-      'js': 'html5shiv/dist/html5shiv.js'
-    },
-    'animate': {
-      'css': 'animate.css/animate.css'
-    }
-  }
+  pkgs =
+    jquery:
+      js: 'jquery/dist/jquery.js'
+    pace:
+      js: 'PACE/pace.js'
+    fontawesome:
+      fonts: 'font-awesome/fonts',
+      scss:  'font-awesome/scss'
+    bootstrap:
+      js:    'bootstrap-sass/assets/javascripts/bootstrap.js',
+      fonts: 'bootstrap-sass/assets/fonts',
+      scss:  'bootstrap-sass/assets/stylesheets'
+    classie:
+      js: 'classie/classie.js'
+    wow:
+      js: 'wow/dist/wow.js'
+    respond:
+      js: 'respond/dest/respond.src.js'
+    html5shiv:
+      js: 'html5shiv/dist/html5shiv.js'
+    animate:
+      css: 'animate.css/animate.css'
 
   if !pkgs[pkg] || !pkgs[pkg][kind]
     throw "couldnt find " + kind + " for package named '" + pkg + "'"
