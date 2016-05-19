@@ -18,11 +18,6 @@ hub ['gulp/tasks/*.coffee']
 # Where things live.
 scssSourceDir = "#{config.sourceDir}/stylesheets"
 
-# Map the utterly non-standard package format to a list of files of a
-# particular type for a package.
-addGlob = (path, extension) ->
-  "#{path}/**/*#{extension ? ".#{extension}" : ''}"
-
 scssLoadPath = [
   scssSourceDir,
   component('bootstrap', 'scss'),
@@ -31,110 +26,118 @@ scssLoadPath = [
 ]
 
 outputDir    = 'intermediate'
-jsOutputDir   = outputDir + "#{outputDir}/javascripts"
-cssOutputDir  = outputDir + "#{outputDir}/stylesheets"
-fontOutputDir = outputDir + "#{outputDir}/fonts"
+jsOutputDir   = "#{outputDir}/javascripts"
+cssOutputDir  = "#{outputDir}/stylesheets"
+fontOutputDir = "#{outputDir}/fonts"
 
-# What goes into the built stylesheets.
-stylesheets =
-  "all.css": [
-    component('animate', 'css')
+assets =
+  stylesheets:
+    all: [
+      'animate'
+    ]
+  javascripts:
+    all: [
+      'jquery'
+      'pace'
+      'bootstrap'
+      'classie'
+      'AnimatedHeader'
+      'wow'
+      'inspinia'
+    ]
+    ie: [
+      'respond'
+      'html5shiv'
+      'inspinia/placeholder'
+    ]
+  fonts: [
+    'fontawesome',
+    'bootstrap'
   ]
-
-sassFiles = {
-  "all.css": [
-    addGlob(scssSourceDir, 'scss'),
-  ]
-}
-
-# What goes into the built javascripts.
-javascripts =
-  "all.js": [
-    'jquery',
-    'pace',
-    'bootstrap',
-    'classie',
-    'AnimatedHeader',
-    'wow',
-    'inspinia'
-  ].map (pkg) -> component pkg, 'js',
-  "ie.js": [
-    'respond',
-    'html5shiv',
-    'inspinia/placeholder'
-  ].map (pkg) -> component pkg, 'js'
-
-
-# The fonts we want to be built.
-fonts = ['fontawesome', 'bootstrap'].map (pkg) -> addGlob(component(pkg, 'fonts'))
 
 # A set of generic tasks to do specific parts of the build.
 gulp.task('default', ['build'])
 gulp.task('build', ['build:production'])
 gulp.task('serve', ['build:development', 'watch'])
 
-for environment in [ 'development', 'production' ]
-  gulp.task('build:' + environment, ['fonts', 'javascripts', 'stylesheets'].map (task) -> 'build:' + task + ':' + environment)
-  gulp.task('build:javascripts:' + environment, Object.keys(javascripts).map (task) -> 'build:javascripts:' + task + ':' + environment)
-  gulp.task('build:stylesheets:' + environment, Object.keys(stylesheets).map (task) -> 'build:stylesheets:' + task + ':' + environment)
+addGlob = (path, extension = null) ->
+  "#{path}/**/*#{if extension then ".#{extension}" else ''}"
 
-  gulp.task 'build:fonts:' + environment, ->
-    gulp.src(fonts)
-      .pipe(gulp.dest(fontOutputDir + '/'))
+for environment in [ 'development', 'production' ]
+  gulp.task "build:#{environment}", ['fonts', 'javascripts', 'stylesheets'].map (task) -> "build:#{task}:#{environment}"
+  gulp.task "build:javascripts:#{environment}", Object.keys(assets.javascripts).map (task) -> "build:javascripts:#{task}:#{environment}"
+  gulp.task "build:stylesheets:#{environment}", Object.keys(assets.stylesheets).map (task) -> "build:stylesheets:#{task}:#{environment}"
+
+  gulp.task "build:fonts:#{environment}", ->
+    fontGlobs = assets.fonts.map (pkg) -> addGlob component pkg, 'fonts'
+
+    gulp.src fontGlobs
+      .pipe gulp.dest fontOutputDir
 
 jsTasks = (filename) ->
-  gulp.task 'build:javascripts:' + filename + ':development', ->
+  files = assets.javascripts[filename].map (pkg) -> component pkg, 'js'
+
+  gulp.task "build:javascripts:#{filename}:development", ->
     gulp
-      .src(javascripts[filename])
-      .pipe(sourcemaps.init())
-      .pipe(concat(filename))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(jsOutputDir + '/'))
+      .src files
+      .pipe sourcemaps.init()
+      .pipe concat "#{filename}.js"
+      .pipe sourcemaps.write '.'
+      .pipe gulp.dest jsOutputDir
 
-  gulp.task 'build:javascripts:' + filename + ':production', ->
+  gulp.task "build:javascripts:#{filename}:production", ->
      gulp
-      .src(javascripts[filename])
-      .pipe(concat(filename))
-      .pipe(uglify())
-      .pipe(gulp.dest(jsOutputDir + '/'))
+      .src files
+      .pipe concat "#{filename}.js"
+      .pipe uglify()
+      .pipe gulp.dest jsOutputDir
 
-Object.keys(javascripts).map(jsTasks)
+Object.keys(assets.javascripts).map jsTasks
 
 cssTasks = (filename) ->
-  gulp.task 'build:stylesheets:' + filename + ':development', ->
-    sassPipe = sass(sassFiles[filename], loadPath: scssLoadPath, sourcemap: true)
+  cssFiles  = assets.stylesheets[filename].map (pkg) -> component pkg, 'css'
+  sassGlobs = addGlob(scssSourceDir, 'scss')
 
-    cssPipe = gulp.src(stylesheets[filename])
-      .pipe(sourcemaps.init())
+  gulp.task "build:stylesheets:#{filename}:development", ->
+    sassPipe = sass sassGlobs, loadPath: scssLoadPath, sourcemap: true
 
-    merge(sassPipe, cssPipe)
-      .pipe(concat(filename))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(cssOutputDir + '/'))
+    cssPipe = gulp.src cssFiles
+      .pipe sourcemaps.init()
 
-  gulp.task 'build:stylesheets:' + filename + ':production', ->
-    sassPipe = sass(sassFiles[filename], { loadPath: scssLoadPath })
+    merge sassPipe, cssPipe
+      .pipe concat "#{filename}.css"
+      .pipe sourcemaps.write '.'
+      .pipe gulp.dest cssOutputDir
 
-    cssPipe  = gulp.src(stylesheets[filename])
+  gulp.task "build:stylesheets:#{filename}:production", ->
+    sassPipe = sass sassGlobs, loadPath: scssLoadPath
 
-    merge(sassPipe, cssPipe)
-      .pipe(concat(filename))
-      .pipe(postcss([
+    cssPipe  = gulp.src cssFiles
+
+    merge sassPipe, cssPipe
+      .pipe concat "#{filename}.css"
+      .pipe postcss [
         autoprefixer(),
         cssnano()
-      ]))
-      .pipe(gulp.dest(cssOutputDir + '/'))
+      ]
+      .pipe gulp.dest cssOutputDir
 
-Object.keys(stylesheets).map(cssTasks)
+Object.keys(assets.stylesheets).map cssTasks
 
 gulp.task 'watch', ->
-  for javascript in javascripts
-    gulp.watch(javascripts[task], ['build:javascripts:' + task + ':development'])
+  for task in assets.javascripts
+    files = assets.javascripts[task].map (pkg) -> component pkg, 'js'
 
-  scssLoadPathGlobs = scssLoadPath.map (path) -> addGlob(path)
-  for stylesheet in stylesheets
-    globs = stylesheets[task].concat(scssLoadPathGlobs)
-    gulp.watch(globs, ['build:stylesheets:' + task + ':development'])
+    gulp.watch files, [ "build:javascripts:#{task}:development" ]
+
+  scssLoadPathGlobs = scssLoadPath.map addGlob
+
+  for task in assets.stylesheets
+    files = assets.stylesheets[filename].map (pkg) -> component pkg, 'css'
+
+    gulp.watch files, [ "build:stylesheets:#{task}:development" ]
+    gulp.watch scssLoadPathGlobs, [ "build:stylesheets:#{tasks}:development" ]
 
 
-  gulp.watch(fonts, ['build:fonts:development'])
+  fontGlobs = assets.fonts.map (pkg) -> addGlob component pkg, 'fonts'
+  gulp.watch(fontGlobs, ['build:fonts:development'])
