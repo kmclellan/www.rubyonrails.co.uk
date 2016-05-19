@@ -51,8 +51,6 @@ bowerComponent = (pkg, kind) ->
   config.bowerRoot + '/' + pkgs[pkg][kind]
 
 vendorComponent = (pkg, kind, file = 'default') ->
-  vendorRoot = 'vendor'
-
   pkgs =
     inspinia:
       js:
@@ -67,6 +65,4 @@ vendorComponent = (pkg, kind, file = 'default') ->
   if !pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]
     throw "couldnt find #{kind} for package named '#{pkg}'."
 
-  "#{vendorRoot}/#{pkg}/#{pkgs[pkg][kind][file]}"
-
-
+  "#{config.vendorDir}/#{pkg}/#{pkgs[pkg][kind][file]}"
