@@ -17,7 +17,6 @@ bowerRoot     = 'bower_components'
 
 # Map the utterly non-standard package format to a list of files of a
 # particular type for a package.
-
 component = (pkg, kind) ->
   [ p, f ] = pkg.split('/')
 
@@ -71,31 +70,24 @@ bowerComponent = (pkg, kind) ->
 vendorComponent = (pkg, kind, file = 'default') ->
   vendorRoot = 'vendor'
 
-  pkgs = {
-    'inspinia': {
-      'js': {
-        'default': 'javascripts/inspinia.js',
-        'placeholder': 'javascripts/placeholder-IE-fixes.js'
-      },
-      'scss': { 'default': 'scss' }
-    },
-    'AnimatedHeader': {
-      'js': {
-        'default': 'js/cbpAnimatedHeader.js'
-      }
-    }
-  }
+  pkgs =
+    inspinia:
+      js:
+        default: 'javascripts/inspinia.js',
+        placeholder: 'javascripts/placeholder-IE-fixes.js'
+      scss:
+        default: 'scss'
+    AnimatedHeader:
+      js:
+        default: 'js/cbpAnimatedHeader.js'
 
   if !pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]
-    throw "couldnt find " + kind + " for package named '" + pkg + "'"
+    throw "couldnt find #{kind} for package named '#{pkg}'."
 
-  vendorRoot + '/' + pkg + '/' + pkgs[pkg][kind][file]
+  "#{vendorRoot}/#{pkg}/#{pkgs[pkg][kind][file]}"
 
 addGlob = (path, extension) ->
-  if extension
-    path + '/**/*.' + extension
-  else
-    path + '/**/*'
+  "#{path}/**/*#{extension ? ".#{extension}" : ''}"
 
 scssLoadPath = [
   scssSourceDir,
@@ -105,9 +97,9 @@ scssLoadPath = [
 ]
 
 outputDir    = 'intermediate'
-jsOutputDir   = outputDir + '/javascripts'
-cssOutputDir  = outputDir + '/stylesheets'
-fontOutputDir = outputDir + '/fonts'
+jsOutputDir   = outputDir + "#{outputDir}/javascripts"
+cssOutputDir  = outputDir + "#{outputDir}/stylesheets"
+fontOutputDir = outputDir + "#{outputDir}/fonts"
 
 # What goes into the built stylesheets.
 stylesheets =
