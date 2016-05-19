@@ -26,6 +26,7 @@ module.exports =
         'wow'
         'aws'
         'amazon'
+        'jsbn'
         'inspinia'
       ]
       ie: [
