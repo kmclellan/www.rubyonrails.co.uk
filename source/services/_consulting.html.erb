@@ -1,3 +1,9 @@
+<% content_for :navbar do %>
+  <% content_tag :li, class: 'visible-lg-block' do %>
+    <%= link_to 'Consulting', '', fragment: 'consulting', class: 'page-scroll' %>
+  <% end %>
+<% end %>
+
 <section id="consulting" class="gray-section features">
   <div class="container">
     <div class="row">

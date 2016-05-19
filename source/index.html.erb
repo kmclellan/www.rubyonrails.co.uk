@@ -2,12 +2,13 @@
 title: Ruby on Rails Consulting
 layout: landing_page
 ---
-<%= partial 'navbar' %>
+<% content_for :navbar do %>
+  <li><%= link_to 'Home', '', fragment: 'page-top', class: 'page-scroll' %></li>
+<% end %>
+
 <%= partial 'slides' %>
 <%= partial 'services' %>
 <%= partial 'projects' %>
 <%= partial 'team' %>
-
 <%= partial 'testimonials' %>
-
 <%= partial 'contact' %>

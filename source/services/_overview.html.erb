@@ -1,3 +1,9 @@
+<% content_for :navbar do %>
+  <% content_tag :li, class: 'hidden-lg' do %>
+    <%= link_to 'Services', '', fragment: 'services', class: 'page-scroll' %>
+  <% end %>
+<% end %>
+
 <section id="services" class="gray-section  services">
   <div class="container">
     <div class="row">
