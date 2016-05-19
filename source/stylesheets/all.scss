@@ -84,15 +84,17 @@ $dark-navy: darken($navy, 10%);
 
       color: #fff;
 
-      p, p a, p a:hover, .big-icon, h2 a, h2 a:hover {
+      p, p a, p a:hover, h2 a, h2 a:hover {
+        color: #fff;
+      }
+
+      .big-icon {
         color: #fff !important;
       }
 
       p {
-        a, a:hover {
-          text: {
-            decoration: underline;
-          }
+        a.btn-default, a.btn-default:hover {
+          color: #333;
         }
       }
     }

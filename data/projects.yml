@@ -1,0 +1,86 @@
+thp:
+  title: The Happiness Project
+  url: https://woss.name/
+  tags:
+    - ruby
+    - ios
+    - web
+    - mental health
+    - wellbeing
+    - analytics
+  icon: bar-chart
+  description: |
+    We’re exploring tools & technologies that will allow people to measure,
+    manage & improve their mental wellbeing. We’re performing experiments that
+    allow us to better understand ourselves and our surrounding environment, so
+    that we can figure out what makes us truly happy!
+
+    Right now, we're looking for people with an interest in improving their
+    mental wellbeing to help us shape these tools. Would you be willing to help
+    out?
+
+sneak_peek:
+  title: A Sneak Peek at The Internet
+  url: https://the-internet.io/
+  tags:
+    - book
+    - internet
+    - protocols
+    - dns
+    - tcp/ip
+    - networking
+  icon: book
+  description: |
+    What happens when you enter <q>www.facebook.com</q> into your web browser
+    and hit enter?
+
+    A Sneak Peek at The Internet will take you on a deep dive through the
+    network stack, from HTTP, SSL, TCP and IP, all the way down through the
+    data link layer, back up to Facebook's data centres, and the return journey
+    back to the browser.
+
+howicode:
+  title: How I Code
+  url: https://howicode.com/
+  tags:
+    - podcast
+    - productivity
+    - programming
+    - health
+    - wellbeing
+  icon: headphones
+  description: |
+    I want to go on a holistic exploration of how developers write code in a
+    sustainable, enjoyable way. I want to hear about their physical
+    environment; the tools they use for development; the SaaS apps they use to
+    make their lives easier; the productivity methodologies they subscribe to;
+    how they balance work and life; and what they do when they're not at the
+    computer.
+
+    I think that documenting this bigger picture will give us a greater insight
+    into what makes for an awesome developer, how we can lead more sustainable
+    lives, and how these people tick.
+
+rock_club:
+  title: Rock Club
+  url: https://rock-climbing.club/
+  tags:
+    - ruby
+    - iOS
+    - analytics
+    - postgresql
+    - heroku
+  icon: picture-o
+  description: |
+    I'd like to keep track of my indoor rock climbing. In particular, I'd like
+    to know if my performance is improving, or if it has plateaued (pun
+    intended!). I've got a bit of a system for keeping track, and I'd like to
+    extend it so that other people can participate, too. I reckon there's a
+    tonne of potential for gamifying things here!
+
+    But that's just the start. With an Apple Watch strapped to your wrist, or
+    an iPhone (securely!) pocketed away, I think we can collect a pile of
+    useful metrics about your climbing automatically. There's the iOS motion
+    sensors, and there's iBeacon indoor location; I think the combo could
+    automagically track your climbs, **and provide feedback on your
+    technique**.
