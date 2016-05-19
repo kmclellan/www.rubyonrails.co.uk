@@ -21,6 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
     "gulp-concat": "^2.6.0",
+    "gulp-hub": "^0.7.1",
     "gulp-postcss": "^6.1.1",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-sourcemaps": "^1.6.0",

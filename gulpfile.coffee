@@ -7,85 +7,19 @@ postcss      = require 'gulp-postcss'
 sass         = require 'gulp-ruby-sass'
 autoprefixer = require 'autoprefixer'
 cssnano      = require 'cssnano'
-del          = require 'del'
 merge        = require 'merge-stream'
+hub     = require 'gulp-hub'
+
+config = require './gulp/config'
+component = require './gulp/lib/component'
+
+hub ['gulp/tasks/*.coffee']
 
 # Where things live.
-sourceDir     = 'source'
-scssSourceDir = "#{sourceDir}/stylesheets"
-bowerRoot     = 'bower_components'
+scssSourceDir = "#{config.sourceDir}/stylesheets"
 
 # Map the utterly non-standard package format to a list of files of a
 # particular type for a package.
-component = (pkg, kind) ->
-  [ p, f ] = pkg.split('/')
-
-  if p == 'inspinia' || p == 'AnimatedHeader'
-    if f
-      vendorComponent(p, kind, f)
-    else
-      vendorComponent(p, kind)
-  else
-    bowerComponent(pkg, kind)
-
-bowerComponent = (pkg, kind) ->
-  pkgs = {
-    'jquery': {
-      'js': 'jquery/dist/jquery.js'
-    },
-    'pace': {
-      'js': 'PACE/pace.js'
-    },
-    'fontawesome': {
-      'fonts': 'font-awesome/fonts',
-      'scss':  'font-awesome/scss'
-    },
-    'bootstrap': {
-      'js':    'bootstrap-sass/assets/javascripts/bootstrap.js',
-      'fonts': 'bootstrap-sass/assets/fonts',
-      'scss':  'bootstrap-sass/assets/stylesheets'
-    },
-    'classie': {
-      'js': 'classie/classie.js'
-    },
-    'wow': {
-      'js': 'wow/dist/wow.js'
-    },
-    'respond': {
-      'js': 'respond/dest/respond.src.js'
-    },
-    'html5shiv': {
-      'js': 'html5shiv/dist/html5shiv.js'
-    },
-    'animate': {
-      'css': 'animate.css/animate.css'
-    }
-  }
-
-  if !pkgs[pkg] || !pkgs[pkg][kind]
-    throw "couldnt find " + kind + " for package named '" + pkg + "'"
-
-  bowerRoot + '/' + pkgs[pkg][kind]
-
-vendorComponent = (pkg, kind, file = 'default') ->
-  vendorRoot = 'vendor'
-
-  pkgs =
-    inspinia:
-      js:
-        default: 'javascripts/inspinia.js',
-        placeholder: 'javascripts/placeholder-IE-fixes.js'
-      scss:
-        default: 'scss'
-    AnimatedHeader:
-      js:
-        default: 'js/cbpAnimatedHeader.js'
-
-  if !pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]
-    throw "couldnt find #{kind} for package named '#{pkg}'."
-
-  "#{vendorRoot}/#{pkg}/#{pkgs[pkg][kind][file]}"
-
 addGlob = (path, extension) ->
   "#{path}/**/*#{extension ? ".#{extension}" : ''}"
 
@@ -204,14 +138,3 @@ gulp.task 'watch', ->
 
 
   gulp.watch(fonts, ['build:fonts:development'])
-
-gulp.task 'clean', ->
-  sass.clearCache()
-  del([outputDir])
-
-gulp.task 'distclean', ['clean'], ->
-  del([
-    bowerRoot,
-    'node_modules',
-    '.sass-cache'
-  ])
