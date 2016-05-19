@@ -3,7 +3,7 @@ config = require '../config'
 module.exports = (pkg, kind) ->
   [ p, f ] = pkg.split('/')
 
-  if p == 'inspinia' || p == 'AnimatedHeader'
+  if p in [ 'inspinia', 'AnimatedHeader' ]
     if f
       vendorComponent(p, kind, f)
     else
