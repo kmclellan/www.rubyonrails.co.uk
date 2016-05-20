@@ -1,0 +1,30 @@
+---
+title: Sign in
+layout: landing_page
+---
+<% content_for :navbar do %>
+  <li><%= link_to 'Home', '', fragment: 'page-top', class: 'page-scroll' %></li>
+<% end %>
+
+<section id="sign-in" class="features white-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>Sign in</h1>
+
+        <p class="lead">
+          Let's see if we can figure out some way of doing login...
+        </p>
+
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+        <p id="status">
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

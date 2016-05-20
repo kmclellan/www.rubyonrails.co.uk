@@ -68,9 +68,17 @@ vendorComponent = (pkg, kind, file = 'default') ->
         default: 'js/cbpAnimatedHeader.js'
     amazon:
       js:
-        default: 'javascripts/amazon-cognito.min.js'
+        default: [
+          'javascripts/aws-cognito-sdk.min.js'
+          'javascripts/amazon-cognito.min.js'
+          'javascripts/amazon-cognito-identity.min.js'
+        ]
 
   if !pkgs[pkg] || !pkgs[pkg][kind] || !pkgs[pkg][kind][file]
     throw "couldnt find #{kind} for package named '#{pkg}'."
 
-  "#{config.vendorDir}/#{pkg}/#{pkgs[pkg][kind][file]}"
+  files = pkgs[pkg][kind][file]
+  files = [files] if typeof files is 'string'
+
+  files.map (file) ->
+    "#{config.vendorDir}/#{pkg}/#{file}"

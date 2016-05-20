@@ -31,3 +31,4 @@ Object.keys(config.assets.javascripts).map jsTasks
 gulp.task 'watch:javascripts', ->
   for task in config.assets.javascripts
     gulp.watch javascriptFilesFor(task), [ "build:javascripts:#{task}:development" ]
+    gulp.watch ["#{config.sourceDir}/javascripts/#{task}.js"], [ "build:javascripts:#{task}:development" ]
