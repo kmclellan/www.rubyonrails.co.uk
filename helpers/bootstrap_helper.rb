@@ -4,4 +4,15 @@ module BootstrapHelper
 
     content_tag :i, '', { class: classes }.merge(options)
   end
+
+  def body_classes
+    classes = case layout = current_page.options[:layout]
+              when 'main'
+                'top-navigation fixed-nav'
+              else
+                layout
+              end
+
+    [classes, page_classes].compact.join(' ')
+  end
 end

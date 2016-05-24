@@ -1,0 +1,35 @@
+<% wrap_layout :layout do %>
+  <div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
+      <%= partial 'main/navbar' %>
+
+      <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+          <h2><%= current_page.data.title %></h2>
+
+          <ol class="breadcrumb">
+            <li><%= link_to 'Home', '/' %></li>
+            <li class="active"><strong><%= current_page.data.title %></strong></li>
+          </ol>
+        </div>
+
+        <div class="col-lg-2">
+        </div>
+      </div>
+
+      <div class="wrapper wrapper-content">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="ibox">
+              <div class="ibox-content">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= partial 'main/footer' %>
+    </div>
+  </div>
+<% end %>
