@@ -9,6 +9,8 @@ module BootstrapHelper
     classes = case layout = current_page.options[:layout]
               when 'main'
                 'top-navigation fixed-nav'
+              when 'middle-box'
+                'white-bg'
               else
                 layout
               end
