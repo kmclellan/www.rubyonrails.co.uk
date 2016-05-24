@@ -6,10 +6,9 @@
 
     <%= stylesheet_link_tag :all %>
   </head>
+
   <body id="page-top" class="<%= current_page.options[:layout].try :dasherize %> <%= page_classes %>">
     <%= partial 'google_tag_manager' %>
-
-    <%= partial 'navbar' %>
 
     <%= yield %>
 
