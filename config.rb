@@ -57,6 +57,7 @@ activate :directory_indexes
 activate :asset_hash
 activate :gzip
 activate :automatic_image_sizes
+activate :relative_assets
 
 activate :external_pipeline,
   name: :gulp,
