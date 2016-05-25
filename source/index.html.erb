@@ -1,15 +1,15 @@
 ---
 title: Ruby on Rails Consulting
-layout: landing_page
+layout: landing-page
 sitemap_priority: 1.0
 ---
 <% content_for :navbar do %>
   <li><%= link_to 'Home', '', fragment: 'page-top', class: 'page-scroll' %></li>
 <% end %>
 
-<%= partial 'slides' %>
-<%= partial 'services' %>
-<%= partial 'projects' %>
-<%= partial 'team' %>
-<%= partial 'testimonials' %>
-<%= partial 'contact' %>
+<%= partial 'landing-page/slides' %>
+<%= partial 'landing-page/services' %>
+<%= partial 'landing-page/projects' %>
+<%= partial 'landing-page/team' %>
+<%= partial 'landing-page/testimonials' %>
+<%= partial 'landing-page/contact' %>
