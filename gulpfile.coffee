@@ -4,9 +4,8 @@ config    = require './gulp/config'
 component = require './gulp/lib/component'
 addGlob   = require './gulp/lib/add_glob'
 
-require './gulp/tasks/fonts'
-require './gulp/tasks/javascripts'
-require './gulp/tasks/stylesheets'
+for task in [ 'clean', 'fonts', 'javascripts', 'stylesheets' ]
+  require "./gulp/tasks/#{task}"
 
 # A set of generic tasks to do specific parts of the build.
 gulp.task('default', ['build'])
